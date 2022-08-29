@@ -1,1 +1,210 @@
+Bài 6:
+static void Main(string[] args)
+        {
+            Console.Title = "Chương trình C#";
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
+
+            Console.WriteLine("Vui lòng nhập năm số từ bàn phím");
+            string[] sArr = new string[5];
+            int[] iArr = new int[5];
+            int check = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write($"Số thứ {i + 1} là: ");
+                sArr[i] = Console.ReadLine();
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                if (!(Int32.TryParse(sArr[i], out iArr[i]))) Console.WriteLine($"Dữ liệu số thứ {i + 1} không hợp lệ!"); 
+                else check += 1;
+            }
+            if (check != 5) goto end;
+            Array.Sort(iArr);
+            Console.WriteLine("Số lớn nhất trong năm số là: {0}", iArr[4]);
+            end:;
+
+
+            Console.ReadKey();
+        }
+Bài 7:
+static void Main(string[] args)
+        {
+            Console.Title = "Chương trình C#";
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
+
+            Console.Write("Nhập điểm: ");
+            var sPoint = Console.ReadLine();
+            int iPoint = 0;
+            switch (sPoint)
+            {
+                case "1":
+                    iPoint = 1 * 10;
+                    break;
+                case "2":
+                    iPoint = 2 * 10;
+                    break;
+                case "3":
+                    iPoint = 3 * 10;
+                    break;
+                case "4":
+                    iPoint = 4 * 100;
+                    break;
+                case "5":
+                    iPoint = 5 * 100;
+                    break;
+                case "6":
+                    iPoint = 6 * 100;
+                    break;
+                case "7":
+                    iPoint = 7 * 1000;
+                    break;
+                case "8":
+                    iPoint = 8 * 1000;
+                    break;
+                case "9":
+                    iPoint = 9 * 1000;
+                    break;
+                default: 
+                    Console.WriteLine("Điểm bạn nhập không hợp lệ!!");
+                    break;
+            }
+            if (iPoint != 0)
+            {
+                Console.WriteLine($"Điểm thưởng là: {iPoint}");
+            }
+
+
+            Console.ReadKey();
+        }
+Bài 8:
+static void Main(string[] args)
+        {
+            Console.Title = "Chương trình C#";
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
+
+            Console.Write("Nhập một số nguyên dương từ 0 đến 999: ");
+            string sNumber = Console.ReadLine();
+            int number;
+            if (Int32.TryParse(sNumber, out number) && (number >= 0 && number <= 999))
+            {
+            }
+            else
+            {
+                Console.WriteLine("Dữ liệu nhập vào không hợp lệ");
+            }
+            int units = 0, dozens = 0, hundreds = 0;
+            units = number % 10;
+            number /= 10;
+            dozens = number % 10;
+            number /= 10;
+            hundreds = number % 10;
+
+            switch (hundreds)
+            {
+                case 0:
+                    break;
+                case 1:
+                    Console.Write("một trăm ");
+                    break;
+                case 2:
+                    Console.Write("hai trăm ");
+                    break;
+                case 3:
+                    Console.Write("ba trăm ");
+                    break;
+                case 4:
+                    Console.Write("bốn trăm ");
+                    break;
+                case 5:
+                    Console.Write("năm trăm ");
+                    break;
+                case 6:
+                    Console.Write("sáu trăm ");
+                    break;
+                case 7:
+                    Console.Write("bảy trăm ");
+                    break;
+                case 8:
+                    Console.Write("tám trăm ");
+                    break;
+                case 9:
+                    Console.Write("chín trăm ");
+                    break;
+
+            }
+            switch (dozens)
+            {
+                case 0:
+                    if (units != 0 && hundreds != 0) Console.Write("lẻ ");
+                    break;
+                case 1:
+                    Console.Write("mười ");
+                    break;
+                case 2:
+                    Console.Write("hai mươi ");
+                    break;
+                case 3:
+                    Console.Write("ba mươi ");
+                    break;
+                case 4:
+                    Console.Write("bốn mươi ");
+                    break;
+                case 5:
+                    Console.Write("năm mươi ");
+                    break;
+                case 6:
+                    Console.Write("sáu mươi ");
+                    break;
+                case 7:
+                    Console.Write("bảy mươi ");
+                    break;
+                case 8:
+                    Console.Write("tám mươi ");
+                    break;
+                case 9:
+                    Console.Write("chín mươi ");
+                    break;
+            }
+            switch (units)
+            {
+                case 0:
+                    break;
+                case 1:
+                    if (dozens == 1 || dozens == 0) Console.WriteLine("một"); else Console.WriteLine("mốt");
+                    break;
+                case 2:
+                    Console.WriteLine("hai");
+                    break;
+                case 3:
+                    Console.WriteLine("ba");
+                    break;
+                case 4:
+                    Console.WriteLine("bốn");
+                    break;
+                case 5:
+                    if (dozens == 0) Console.WriteLine("năm"); else Console.WriteLine("lăm");
+                    break;
+                case 6:
+                    Console.WriteLine("sáu");
+                    break;
+                case 7:
+                    Console.WriteLine("bảy");
+                    break;
+                case 8:
+                    Console.WriteLine("tám");
+                    break;
+                case 9:
+                    Console.WriteLine("chín");
+                    break;
+            }
+
+            Console.ReadKey();
+        }
+ 
 
