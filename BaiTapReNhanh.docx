@@ -1,3 +1,186 @@
+Bài 3:
+static void Main(string[] args)
+        {
+            Console.Title = "Chương trình C#";
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
+
+            Console.WriteLine("Nhập vào ba số nguyên");
+            Console.Write("Số nguyên thứ nhất: ");
+            if (!(Int32.TryParse(Console.ReadLine(), out int i1)))
+            {
+                Console.WriteLine("Dữ liệu số nguyên thứ nhất không hợp lệ");
+                goto end;
+            }
+            Console.Write("Số nguyên thứ hai: ");
+            if (!(Int32.TryParse(Console.ReadLine(), out int i2)))
+            {
+                Console.WriteLine("Dữ liệu số nguyên thứ hai không hợp lệ");
+                goto end;
+            }
+            Console.Write("Số nguyên thứ ba: ");
+            if (!(Int32.TryParse(Console.ReadLine(), out int i3)))
+            {
+                Console.WriteLine("Dữ liệu số nguyên thứ ba không hợp lệ");
+                goto end;
+            }
+            int max = i1;
+            if (i1 < i2)
+            {
+                max = i2;
+                if (i2 < i3) max = i3;
+            }
+            else
+            {
+                if (i1 < i3) max = i3;
+            }
+            Console.WriteLine($"Số lớn nhất trong ba số nguyên là: {max}");
+            end:;
+
+            Console.ReadKey();
+        }
+Bài 4:
+static void Main(string[] args)
+        {
+            Console.Title = "Chương trình C#";
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
+
+            Console.WriteLine("Nhập vào ba số thực");
+            Console.Write("Số thực thứ nhất: ");
+            if (!(Single.TryParse(Console.ReadLine(), out float f1)))
+            {
+                Console.WriteLine("Dữ liệu số thực thứ nhất không hợp lệ");
+                goto end;
+            }
+            Console.Write("Số thực thứ hai: ");
+            if (!(Single.TryParse(Console.ReadLine(), out float f2)))
+            {
+                Console.WriteLine("Dữ liệu số thực thứ hai không hợp lệ");
+                goto end;
+            }
+            Console.Write("Số thực thứ ba: ");
+            if (!(Single.TryParse(Console.ReadLine(), out float f3)))
+            {
+                Console.WriteLine("Dữ liệu số thực thứ ba không hợp lệ");
+                goto end;
+            }
+            float max = f1, mid, min;
+            if (f1 < f2)
+            {
+                max = f2;
+                if (f2 < f3)
+                {
+                    max = f3;
+                    mid = f2;
+                    min = f1;
+                }
+                else
+                {
+                    if (f1 < f3)
+                    {
+                        mid = f3;
+                        min = f1;
+                    }
+                    else
+                    {
+                        mid = f1;
+                        min = f3;
+                    }
+                }
+            }
+            else
+            {
+                min = f2;
+                if (f1 < f3)
+                {
+                    max = f3;
+                    mid = f1;
+                }
+                else
+                {
+                    max = f1;
+                    if (f2 < f3)
+                    {
+                        mid = f3;
+                    }
+                    else
+                    {
+                        mid = f2;
+                        min = f3;
+                    }
+                }
+            }
+            Console.WriteLine($"Thứ tự giảm dần của ba số thực là: {max} > {mid} > {min}");
+            end:;
+
+            Console.ReadKey();
+        }
+
+Bài 5:
+static void Main(string[] args)
+        {
+            Console.Title = "Chương trình C#";
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
+
+            Console.Write("Nhập một chữ số nguyên từ 0 đến 9: ");
+            string sNumber = Console.ReadLine();
+            if (Int32.TryParse(sNumber, out int number))
+            {
+                if (number < 0 || number > 9)
+                {
+                    Console.WriteLine($"Dữ liệu bạn nhập \"{sNumber}\" không nằm trong giới hạn (0 -> 9)");
+                }
+                else
+                {
+                    Console.Write($"Từ tiếng Anh tương ứng với {number} là: ");
+                    switch (number)
+                    {
+                        case 0:
+                            Console.WriteLine("Zero");
+                            break;
+                        case 1:
+                            Console.WriteLine("One");
+                            break;
+                        case 2:
+                            Console.WriteLine("Two");
+                            break;
+                        case 3:
+                            Console.WriteLine("Three");
+                            break;
+                        case 4:
+                            Console.WriteLine("Four");
+                            break;
+                        case 5:
+                            Console.WriteLine("Five");
+                            break;
+                        case 6:
+                            Console.WriteLine("Six");
+                            break;
+                        case 7:
+                            Console.WriteLine("Seven");
+                            break;
+                        case 8:
+                            Console.WriteLine("Eight");
+                            break;
+                        case 9:
+                            Console.WriteLine("Nine");
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Dữ liệu bạn nhập \"{sNumber}\" không hợp lệ");
+            }
+
+
+            Console.ReadKey();
+        }
 Bài 6:
 static void Main(string[] args)
         {
@@ -91,12 +274,10 @@ static void Main(string[] args)
             Console.Write("Nhập một số nguyên dương từ 0 đến 999: ");
             string sNumber = Console.ReadLine();
             int number;
-            if (Int32.TryParse(sNumber, out number) && (number >= 0 && number <= 999))
+            if (!(Int32.TryParse(sNumber, out number) && (number >= 0 && number <= 999)))
             {
-            }
-            else
-            {
-                Console.WriteLine("Dữ liệu nhập vào không hợp lệ");
+                Console.WriteLine($"Dữ liệu nhập vào \"{sNumber}\" không hợp lệ");
+                goto end;
             }
             int units = 0, dozens = 0, hundreds = 0;
             units = number % 10;
@@ -203,8 +384,7 @@ static void Main(string[] args)
                     Console.WriteLine("chín");
                     break;
             }
+            end:;
 
             Console.ReadKey();
         }
- 
-
