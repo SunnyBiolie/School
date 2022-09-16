@@ -1,0 +1,119 @@
+Phạm Nguyễn Chí Khoa – 31211020279
+Bài 1:
+static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.Unicode;
+        Console.OutputEncoding = Encoding.Unicode;
+
+        try
+        {
+         	int[] iArr = new int[20];
+        	for (int i = 0; i < iArr.Length; i++){
+                iArr[i] = i * 10;
+                Console.Write($"{iArr[i]} ");
+            }
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Có lỗi: {error.Message}");             
+        }
+        Console.ReadKey();
+    }
+Bài 2:
+static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.Unicode;
+        Console.OutputEncoding = Encoding.Unicode;
+
+        try
+        {
+         	int[] iArr = new int[10];
+            Random r = new Random();
+            for (int i = 0; i < iArr.Length; i++) {
+                iArr[i] = r.Next(1, 100);
+            }
+            int min = iArr[0], max = iArr[0];
+            for (int i = 0; i < iArr.Length; i++) {
+                Console.Write($"{iArr[i]} ");
+                if (iArr[i] < min) min = iArr[i];
+                if (iArr[i] > max) max = iArr[i];
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Số nhỏ nhất là: {min}, số lớn nhất là: {max}");
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Có lỗi: {error.Message}");             
+        }
+        Console.ReadKey();
+    }
+ 
+Bài 3:
+static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.Unicode;
+        Console.OutputEncoding = Encoding.Unicode;
+
+        try
+        {
+         	int[] iArr = new int[10];
+            Random r = new Random();
+            for (int i = 0; i < iArr.Length; i++) {
+                iArr[i] = r.Next(1, 100);
+                Console.Write(iArr[i] + "\t");
+            }
+            Console.WriteLine();
+            int temp = 0;
+            for (int i = 0; i < iArr.Length - 1; i++) {
+                for (int j = i + 1; j < iArr.Length; j++) {
+                    if (iArr[i] >= iArr[j]) {
+                        temp = iArr[i];
+                        iArr[i] = iArr[j];
+                        iArr[j] = temp;
+                    }
+                }
+            }
+            for (int i = 0; i < iArr.Length; i++) {
+                Console.Write(iArr[i] + "\t");
+            }
+            Console.WriteLine();
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Có lỗi: {error.Message}");             
+        }
+        Console.ReadKey();
+    }
+Bài 4:
+static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.Unicode;
+        Console.OutputEncoding = Encoding.Unicode;
+
+        try
+        {
+         	int N = 100;  //Thay N để tìm số nguyên tố từ [2, N]
+            bool[] arr = new bool[N+1];
+            for (int i = 2; i <= N; i++) {
+                arr[i] = true;
+            }
+            for (int i = 2; i <= N; i++) {
+                if (arr[i] == true) {
+                    for (int j = i*i; j <= N; j += i) {
+                        arr[j] = false;
+                    }
+                }
+            }
+            for (int i = 2; i <= N; i++) {
+                if (arr[i] == true) {
+                    Console.Write($"{i} ");
+                }
+            }
+            Console.WriteLine();
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Có lỗi: {error.Message}");             
+        }
+        Console.ReadKey();
+    }
