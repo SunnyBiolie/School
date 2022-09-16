@@ -1,0 +1,125 @@
+Phạm Nguyễn Chí Khoa – 31211020279
+Bài 1:
+static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.Unicode;
+        Console.OutputEncoding = Encoding.Unicode;
+
+        try
+        {
+         	Random r = new Random();
+            Console.Write("Nhập số hàng của ma trận: ");
+            int m = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Nhập số cột của ma trận: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[][] matrixA = new int[m][];
+            for (int i = 0; i < m; i++) {
+                matrixA[i] = new int[n];
+                for (int j = 0; j < n; j++) {
+                    matrixA[i][j] = r.Next(1, 100);
+                }
+            }
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    Console.Write($"{matrixA[i][j], 4}");
+                }
+                Console.WriteLine();
+            }
+
+            int[] arr = new int[m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    arr[j] = matrixA[j][i];
+                }
+                int max = arr[0], min = arr[0];
+                for (int j = 0; j < m; j++) {
+                    if (arr[j] > max) {
+                        max = arr[j];
+                    }
+                    if (arr[j] < min) {
+                        min = arr[j];
+                    }
+                }
+                Console.WriteLine($"Số lớn nhất của cột {i+1} là: {max, 3}, số bé nhất là: {min, 3}");
+            }
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Có lỗi: {error.Message}");             
+        }
+        Console.ReadKey();
+    }
+Bài 2:
+static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.Unicode;
+        Console.OutputEncoding = Encoding.Unicode;
+
+        try
+        {
+         	int[][] matrix = {
+                new int[] {1, 2, 3, 4},
+                new int[] {2, 1, 5, 6},
+                new int[] {3, 5, 2, 9},
+                new int[] {4, 6, 9, 1}
+            };
+            int count = 0;
+            for (int i = 0; i < matrix.Length; i++) {
+                for (int j = 0; j < i; j++) {
+                    if (i == j) continue;
+                    if (matrix[i][j] != matrix[j][i]) count++;
+                    if (count > 0) {
+                        break;
+                    }
+                }
+                if (count > 0) {
+                    break;
+                }
+            }
+            if (count != 0) Console.WriteLine("Đây không phải ma trận đối xứng qua đường chéo chính");
+            else Console.WriteLine("Đây là ma trận đối xứng qua đường chéo chính");
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Có lỗi: {error.Message}");             
+        }
+        Console.ReadKey();
+    }
+Bài 3:
+static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.Unicode;
+        Console.OutputEncoding = Encoding.Unicode;
+
+        try
+        {
+         	Random r = new Random();
+            Console.Write("Nhập số hàng và cột của ma trận vuông cấp n: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[][] matrix = new int[n][];
+            for (int i = 0; i < n; i++) {
+                matrix[i] = new int[n];
+                for (int j = 0; j < n; j++) {
+                    matrix[i][j] = r.Next(-100, 100);
+                }
+            }
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    Console.Write($"{matrix[i][j], 4}");
+                }
+                Console.WriteLine();
+            }
+            int sum = 0;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < i; j++) {
+                    if (matrix[i][j] > 0 && matrix[i][j] % 5 == 0) sum += matrix[i][j];
+                }
+            }
+            Console.WriteLine($"Tổng các phần tử dương và chia hết cho 5 ở tam giác dưới đường chéo chính là: {sum}");
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine($"Có lỗi: {error.Message}");             
+        }
+        Console.ReadKey();
+    }
