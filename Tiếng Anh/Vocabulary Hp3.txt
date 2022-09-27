@@ -8,3 +8,23 @@ Unit 1:
   - exposure: 
   - exclusive: loại trừ
   - consultant: chuyên gia tư vấn
+Unit 2:
+  - approval (n): phê duyệt, chấp thuận
+  - authority (n): thẩm quyền
+  - archive (v/n): lưu trữ / kho lưu trữ
+  - avenue (n): đại lộ (đường lớn)
+  - bureaucratic (adj): quan liêu
+  - comparable (adj): có thể so sánh
+  - compensation (n): sự đền bù
+  - conservative (adj): bảo thủ
+  - controversial (adj): gây tranh cãi
+  - democratic (adj): dân chủ
+  - emphasis (n): sự nhấn mạnh
+  - superficial (adj): hời hợt, không sâu sắc
+  - hierarchical (adj): thứ bậc
+  - incentive (n): khuyến khích
+  - inquiry (n): cuộc điều tra
+  - pattern (n): khuôn mẫu
+  - probe (v/n): thăm dò / sự điều tra
+  - progressive (adj): phát triển, xảy ra dần dần
+  well established: được nhiều người biết đến
