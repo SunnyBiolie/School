@@ -8,7 +8,7 @@ Unit 1:
   - exposure: 
   - exclusive: loại trừ
   - consultant: chuyên gia tư vấn
-Unit 2:
+Unit 4:
   - approval (n): phê duyệt, chấp thuận
   - authority (n): thẩm quyền
   - archive (v/n): lưu trữ / kho lưu trữ
@@ -23,8 +23,29 @@ Unit 2:
   - superficial (adj): hời hợt, không sâu sắc
   - hierarchical (adj): thứ bậc
   - incentive (n): khuyến khích
-  - inquiry (n): cuộc điều tra
+  - enquiry (n): cuộc điều tra
   - pattern (n): khuôn mẫu
   - probe (v/n): thăm dò / sự điều tra
   - progressive (adj): phát triển, xảy ra dần dần
   well established: được nhiều người biết đến
+Unit 6:
+  - aggressively (adv): một cách giận dữ và bạo lực / một cách quyết tâm mạnh 
+  - bankrupt (adj) / bankruptcy (n): phá sản
+  - commodity (n): hàng
+  - depression (n): trì trệ
+  - disastrous (adj): tai hại (extremely bad or unsuccessful)
+  - dividend (n): cổ tức
+  - downturn (n): suy thoái
+  - emerging (adj): mới nổi (starting to exist)
+  - equity (n): vốn chủ sở hữu / equity stake: cổ phần
+  - expertise (n): chuyên môn
+  - esoteric (adj): bí truyền, độc 
+  - inflation (n): lạm phát
+  - intention (n): có ý định, có chủ đích
+  - interim (adj): tạm thời
+  - recession (n): thời kỳ suy
+  - perceive (v): nhận thức
+  - potential (n/adj): tiềm năng / có khả năng xảy khi đủ điều kiện cần
+  - versatile (adj): linh 
+  credit crunch (n): khủng hoảng tín dụng
+  interest rate: lãi suất
