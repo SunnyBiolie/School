@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp
+{
+    class Chuong1
+    {
+        static G Sum<G>(G a, G b)
+        {
+            if (a.GetType().IsArray)
+            {
+                // Chỉ hoạt động khi hai mảng a, b là hai mảng string
+                string str1 = string.Join(",", (dynamic)a);
+                string str2 = string.Join(",", (dynamic)b);
+                str2 = str2.Insert(0, ",");
+                string str = string.Concat(str1, str2);
+                string[] subs = str.Split(",");
+                G sum = (dynamic)subs;
+                return sum;
+            }
+            else
+            {
+                G sum = (dynamic)a + (dynamic)b;
+            return sum;
+            }
+        }
+        // Tìm min, max: trả về mảng hai phần tử, phần tử đầu là min, phần tử hai là max
+        static int[] FindMinMax(int[] arr)
+        {
+            int[] results = new int[2];
+            int min = arr[0];
+            for (int i = 1; i < arr.Length; i++)
+                if (arr[i] < min) min = arr[i];
+            results[0] = min;
+            int max = arr[0];
+            for (int i = 1; i < arr.Length; i++)
+                if (arr[i] > max) max = arr[i];
+                results[1] = max;
+            return results;
+        }
+        static void Main1(string[] args)
+        {
+            Console.OutputEncoding = Encoding.Unicode;
+
+            string[] a = new string[] { "Pham", "Nguyen" };
+            string[] b = new string[] { "Chi", "Khoa", "SunnyBiolie" };
+            foreach (var element in Sum<string[]>(a, b))
+                Console.Write($"{element}");
+            Console.WriteLine();
+
+            int[] arr = new int[1000];
+            Random r = new Random();
+            for (int i = 0; i < arr.Length; i++)
+                arr[i] = r.Next(1, 100000);
+            Console.WriteLine($"Số nhỏ nhất là: {FindMinMax(arr)[0]}");
+            Console.WriteLine($"Số lớn nhất là: {FindMinMax(arr)[1]}");
+
+            //Timing
+            Timing timer = new Timing();
+
+            timer.startTime();
+            Sum<string[]>(a, b);
+            timer.StopTime();
+            Console.WriteLine($"Thời gian thực thi hàm cộng là: {timer.Result().TotalMilliseconds}ms");
+
+            timer.startTime();
+            FindMinMax(arr);
+            timer.StopTime();
+            Console.WriteLine($"Thời gian thực thi tìm min, max là: {timer.Result().TotalMilliseconds}ms");
+
+            Console.ReadKey();
+        }
+    }
+}
