@@ -1,0 +1,300 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CTDL_GT
+{
+    class ScoreTracking1
+    {
+        static void IniRanArr1D(out Array array, int length, int startIndex)
+        {
+            array = Array.CreateInstance(typeof(float), new int[1] { length }, new int[1] { startIndex });
+            Random r = new Random();
+            for (int i = array.GetLowerBound(0); i < array.GetLength(0); i++)
+                array.SetValue(r.Next(11), i);
+            return;
+        }
+        static void PrintArr1D(Array array)
+        {
+            int count = 0;
+            for (int i = array.GetLowerBound(0); i < array.GetLength(0); i++)
+            {
+                count++;
+                Console.Write($"{array.GetValue(i), 5}");
+                if (count % 25 == 0) Console.WriteLine();
+            }
+        }
+        static float AvgScore(Array array)
+        {
+            int sum = 0;
+            for (int i = array.GetLowerBound(0); i < array.GetLength(0); i++)
+                sum += Convert.ToInt32(array.GetValue(i));
+            float avg = (float)sum/array.GetLength(0);
+            return avg;
+        }
+        static int MinScore(Array array)
+        {
+            int min = Convert.ToInt32(array.GetValue(Convert.ToInt32(array.GetLowerBound(0))));
+            for (int i = array.GetLowerBound(0)+1; i < array.GetLength(0); i++)
+                if (min > Convert.ToInt32(array.GetValue(i))) min = Convert.ToInt32(array.GetValue(i));
+            return min;
+        }
+        static int MaxScore(Array array)
+        {
+            int max = Convert.ToInt32(array.GetValue(Convert.ToInt32(array.GetLowerBound(0))));
+            for (int i = array.GetLowerBound(0)+1; i < array.GetLength(0); i++)
+                if (max < Convert.ToInt32(array.GetValue(i))) max = Convert.ToInt32(array.GetValue(i));
+            return max;
+        }
+        public void Bai1()
+        {
+            Console.WriteLine("--- Bài 1 ---");
+            Array MathSub;
+            IniRanArr1D(out MathSub, 1000, 0);
+            Console.WriteLine("Điểm môn toán:");
+            PrintArr1D(MathSub);
+            Console.WriteLine($"\nĐiểm trung bình môn toán: {AvgScore(MathSub)}");
+            Console.WriteLine($"Điểm thấp nhất môn toán: {MinScore(MathSub)}");
+            Console.WriteLine($"Điểm cao nhất môn toán: {MaxScore(MathSub)}");
+        }
+    }
+    class ScoreTracking2
+    {
+        static void IniRanArr2D(out Array array, int lenArr1, int lenArr2, int startIndex1, int startIndex2)
+        {
+            array = Array.CreateInstance(typeof(float), new int[2] { lenArr1, lenArr2 }, new int[2] { startIndex1, startIndex2 });
+            Random r = new Random();
+            for (int i = array.GetLowerBound(0); i < array.GetLength(0); i++)
+            {
+                for (int j = array.GetLowerBound(1); j < array.GetLength(1); j++)
+                {
+                    array.SetValue(r.Next(4, 11), i, j);
+                }
+            }
+        }
+        static void PrintArr2D(Array arr)
+        {
+            for (int i = arr.GetLowerBound(0); i < arr.GetLength(0); i++)
+            {
+                for (int j = arr.GetLowerBound(1); j < arr.GetLength(1); j++)
+                {
+                    Console.Write("{0, 20}", arr.GetValue(i, j));
+                }
+                Console.WriteLine();
+            }
+        }
+        const int subjectNum = 4;
+        static void Subjects()
+        {
+            string[] subjects = new string[subjectNum] { "Toán cao cấp", "Hóa đại cương", "Cơ sở lập trình", "Tư tưởng HCM" };
+            for (int i = 0; i < subjects.Length; i++)
+                Console.Write("{0, 20}", subjects[i]);
+            Console.WriteLine();
+        }
+        static void AvgScore(Array arr)
+        {
+            for (int j = arr.GetLowerBound(1); j < arr.GetLength(1); j++)
+            {
+                int sum = 0;
+                for (int i = arr.GetLowerBound(0); i < arr.GetLength(0); i++)
+                {
+                    sum += Convert.ToInt32(arr.GetValue(i, j));
+                }
+                Console.Write($"{"ĐTB môn", 12}:{(float)sum/Convert.ToInt32(arr.GetLength(0)), 7}");
+            }
+            Console.WriteLine();
+        }
+        static void MinScore(Array arr)
+        {
+            for (int j = arr.GetLowerBound(1); j < arr.GetLength(1); j++)
+            {
+                int min = Convert.ToInt32(arr.GetValue(Convert.ToInt32(arr.GetLowerBound(0)), j));
+                for (int i = arr.GetLowerBound(0); i < arr.GetLength(0); i++)
+                {
+                    if (min > Convert.ToInt32(arr.GetValue(i, j))) min = Convert.ToInt32(arr.GetValue(i, j));
+                }
+                Console.Write($"{"Điểm thấp nhất:", 16}{min, 4}");
+            }
+            Console.WriteLine();
+        }
+        static void MaxScore(Array arr)
+        {
+            for (int j = arr.GetLowerBound(1); j < arr.GetLength(1); j++)
+            {
+                int max = Convert.ToInt32(arr.GetValue(Convert.ToInt32(arr.GetLowerBound(0)), j));
+                for (int i = arr.GetLowerBound(0); i < arr.GetLength(0); i++)
+                {
+                    if (max < Convert.ToInt32(arr.GetValue(i, j))) max = Convert.ToInt32(arr.GetValue(i, j));
+                }
+                Console.Write($"{"Điểm cao nhất:", 15}{max, 5}");
+            }
+        }
+        public void Bai2()
+        {
+            Console.WriteLine("--- Bài 2 ---");
+            Array arr;
+            IniRanArr2D(out arr, 40, subjectNum, 0, 0);
+            Subjects();
+            PrintArr2D(arr);
+            AvgScore(arr);
+            MinScore(arr);
+            MaxScore(arr);
+        }
+    }
+    class ScoreTrackingList
+    {
+        static void IniRanArr1D(List<int> score, int n)
+        {
+            Random r = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                score.Add(r.Next(5, 11));
+            }
+        }
+        static void PrintArr1D(List<int> score)
+        {
+            int count = 0;
+            score.ForEach(delegate(int point)
+            {
+                count++;
+                Console.Write($"{point, 5}");
+                if (count % 25 == 0) Console.WriteLine();
+            });
+        }
+        static float AvgScore(List<int> score)
+        {
+            int sum = 0;
+            int count = 0;
+            score.ForEach(delegate(int point)
+            {
+                count++;
+                sum += point;
+            });
+            float avg = (float)sum/count;
+            return avg;
+        }
+        static int MinScore(List<int> score)
+        {
+            int min = score[0];
+            score.ForEach(delegate(int point)
+            {
+                if (min > point) min = point;
+            });
+            return min;
+        }
+        static int MaxScore(List<int> score)
+        {
+            int max = score[0];
+            score.ForEach(delegate(int point)
+            {
+                if (max < point) max = point;
+            });
+            return max;
+        }
+        public void Bai3()
+        {
+            Console.WriteLine("--- Bài 3 ---");
+            List<int> score = new List<int>();
+            IniRanArr1D(score, 1000);
+            Console.WriteLine("Điểm môn toán:");
+            PrintArr1D(score);
+            Console.WriteLine($"\nĐiểm trung bình môn toán: {AvgScore(score)}");
+            Console.WriteLine($"Điểm thấp nhất môn toán: {MinScore(score)}");
+            Console.WriteLine($"Điểm cao nhất môn toán: {MaxScore(score)}");
+        }
+    } 
+    class ScoreTrackingArrayList
+    {
+        static void IniRanArr1D(ArrayList score, int len)
+        {
+            Random r = new Random();
+            for (int i = 0; i < len; i++)
+            {
+                score.Add(r.Next(5, 11));
+            }
+        }
+        static void PrintArr1D(ArrayList score)
+        {
+            int count = 0;
+            for (int i = 0; i < score.Count; i++)
+            {
+                count++;
+                Console.Write($"{score[i], 5}");
+                if (count % 25 == 0) Console.WriteLine();
+            }
+        }
+        static float AvgScore(ArrayList score)
+        {
+            int sum = 0;
+            for (int i = 0; i < score.Count; i++)
+            {
+                sum += Convert.ToInt32(score[i]);
+            }
+            float avg = (float)sum/score.Count;
+            return avg;
+        }
+        static int MinScore(ArrayList score)
+        {
+            int min = Convert.ToInt32(score[0]);
+            for (int i = 0; i < score.Count; i++)
+            {
+                if (min > Convert.ToInt32(score[i])) min = Convert.ToInt32(score[i]);
+            }
+            return min;
+        }
+        static int MaxScore(ArrayList score)
+        {
+            int max = Convert.ToInt32(score[0]);
+            for (int i = 0; i < score.Count; i++)
+            {
+                if (max < Convert.ToInt32(score[i])) max = Convert.ToInt32(score[i]);
+            }
+            return max;
+        }
+        public void Bai4()
+        {
+            Console.WriteLine("--- Bài 4 ---");
+            ArrayList score = new ArrayList();
+            IniRanArr1D(score, 1000);
+            Console.WriteLine("Điểm môn toán:");
+            PrintArr1D(score);
+            Console.WriteLine($"\nĐiểm trung bình môn toán: {AvgScore(score)}");
+            Console.WriteLine($"Điểm thấp nhất môn toán: {MinScore(score)}");
+            Console.WriteLine($"Điểm cao nhất môn toán: {MaxScore(score)}");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Timing timer = new Timing();
+            ScoreTracking1 tracking1 = new ScoreTracking1();
+            ScoreTracking2 tracking2 = new ScoreTracking2();
+            ScoreTrackingList trackingList = new ScoreTrackingList();
+            ScoreTrackingArrayList trackingArrayList = new ScoreTrackingArrayList();
+
+            timer.startTime();
+            tracking1.Bai1();
+            timer.StopTime();
+            Console.WriteLine($"Thời gian thực thi là: {timer.Result().TotalMilliseconds}ms\n");
+            
+            tracking2.Bai2();
+            Console.WriteLine();
+
+            timer.startTime();
+            trackingList.Bai3();
+            timer.StopTime();
+            Console.WriteLine($"Thời gian thực thi là: {timer.Result().TotalMilliseconds}ms\n");
+
+
+            timer.startTime();
+            trackingArrayList.Bai4();
+            timer.StopTime();
+            Console.WriteLine($"Thời gian thực thi là: {timer.Result().TotalMilliseconds}ms\n");
+        }
+    }
+}
