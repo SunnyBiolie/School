@@ -1,0 +1,73 @@
+1. About scss: (Máy này đã được cài đặt nodejs)
+	- Open cmd where you want to complie scss to css and type:  >sass 'name'.scss 'name'.css 
+	- If you want it auto compie, type:  >sass --watch 'name'.scss:'name'.css
+
+
+2. About ngrok: (dùng để tạo ra URL tạm thời cho các thiết bị khác có thể dùng được web)
+
+	- Dùng VSCode chạy live sever cho trang web cần tạo cổng (URL)
+	- Copy đường id đường dẫn trên web lúc chạy live sever
+	- Vào folder chứa ngrok.exe
+	- Truy cập vào file ngrok.exe
+	- Gõ lệnh: ngrok http [id-đường-dẫn-đã-copy]
+
+
+3. About git and github: 
+
+ + Có hai loại lưu trữ là Local Repository (bằng git trong máy tính) và Remote Repository (trên github)
+    Hai repo này sẽ được liên kết với nhau để trao đổi các file source code từ trong máy lên github
+
+		Working Directory --> Staging Area --> Local Repo --> Github Repo
+
+	- Trước tiên ta cần tạo ra một Local Repo:
+    Chọn folder muốn làm Local Repo, mở Terminal tại folder, gõ: 
+
+						>git init
+
+	- Tạo Remote Repo (repo trên Github), lúc này ta sẽ nhận được URL của Remote Repo
+	- Sau đó ta liên kết local và remote repo:
+
+						>git remote add origin [Github_Repo_URL]
+
+	- Ta làm việc với folder, sẽ tạo ra các file và có các thay đổi, ta cần lưu những thay đổi đó vào vùng đệm
+    Vùng này được gọi là Stanging Area, vùng lưu trữ trước khi ta xác nhận những thay đổi đó để lưu vào Local Repo
+    Ta gõ lệnh: (thay vì add một file ta có thể dùng >git add . /để add tất cả các file có sự thay đổi
+
+						>git add [tên-file-cần-add]
+
+	- Sau khi đã add file, ta muốn xác nhận sẽ lưu file vào local, ta gõ: 
+
+						>git commit -m "[mô-tả-của-bạn]"
+
+    Ta có thể thay đổi thông điệp mô tả khi commit bằng cách >git commit --amend -m "[thông-điệp-mới]"
+	- Ta upload tất cả các commit trong Local Repo lên Github: (ở brand-name ta dùng master nếu đó là nhánh 9h)
+
+						>git push origin [brand-name]
+
+ + >git status /để kiểm tra trạng thái hiện tại của git, có sự thay đổi nào chưa được add vào staging area hay không, có file nào trong staging area chờ được commit không
+ + >git diff [index-commit-1] [index-commit-2]/so sánh sự thay đổi giữa hai commit
+ + >git reset [tên-file] /xóa bộ nhớ của Staging Area, reset việc add file nhưng không đổi gì về Working Directory
+
+	- Tải Remote Repo trên Github về Local PC:
+						>git clone [Github_Repo_URL] [đặt-tên-folder]
+ + >git fetch /dùng để tìm về sự thay đổi, khác biệt giữa Remote Repo và Local Repo
+   >git pull /cập nhật những thay đổi được fetch thấy về Local Repo
+
+
+4. About JSON server:(dùng để tự tạo ra file JSON rồi fake REST API) .Viết file JSON .Đưa file JSON lên web nhờ JSON server .Dùng fetch lấy dữ liệu về để làm việc 
+
+    -Làm theo hướng dẫn của [https://github.com/typicode/json-server] //Nó sẽ tải json-server về PC
+    -Làm theo hướng dẫn của F8 nếu chỉ muốn tải json-server về folder đang làm việc:
+	+ Máy phải được cài đặt NodeJS (installed)
+	+ Mở Terminal tại folder chứa JSON, gõ lệnh:  >npm init  //Rồi nhấn Enter cho đến khi xong --> package.json
+	+ Tiếp tục gõ lệnh:  >npm install json-server  //Sau khi tải xong, trong package.json sẽ có thêm mục "dependencies" 
+	+ Ta tạo và viết file JSON như mong muốn
+	+ Ta vào file package.json, ở mục "scripts" ta thêm ["start": "json-server --watch [têncủafilejson].json",]
+	+ Sau đó ta chỉ việc vào Terminal khi nãy vào gõ lệnh:  
+
+						>npm start
+
+
+5. About Postman: (Dùng để tương tác với fake REST API từ json-server, có thể thực hiện các phương thức để tương tác với dữ liệu như lấy, thêm, sửa, xóa,...)
+
+	Vào 'Collections', nhấn '+' mở new collection, nhấn '...' chọn 'Add request', chọn phương thức muốn làm việc, nhập URL của file JSON vào, chuyển qua phần 'Body' và nhập các tham số vào, nhấn 'Send'
