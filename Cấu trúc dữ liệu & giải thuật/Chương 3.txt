@@ -1,0 +1,231 @@
+using System;
+using System.Collections;
+using System.Text.RegularExpressions;
+
+class Program
+{
+    static int Priority(string Operator)    // Độ ưu tiên của toán tử
+    {
+        if (Operator == "*" || Operator == "/")
+            return 2;
+        if (Operator == "+" || Operator == "-")
+            return 1;
+        return 0;
+    }
+    static void FormatExpression(ref string inputExpression)    // Format lại chuỗi biểu thức
+    {
+        Regex trimmer = new Regex(@"\s+");
+        inputExpression = trimmer.Replace(inputExpression, "");
+        inputExpression = Regex.Replace(inputExpression, @"\+|\-|\*|\/|\^|\)|\(", delegate(Match match)
+        {
+            return " " + match.Value + " ";
+        });
+        inputExpression = inputExpression.Replace("  ", " ");
+        inputExpression = inputExpression.Trim();
+    }
+    static bool IsOperator(string s)    // kiểm tra toán tử
+    {
+        return Regex.Match(s, @"\+|\-|\*|\/").Success;
+    }
+    static bool IsOperand(string s)     // Kiểm tra toán hạng
+    {
+        return Regex.Match(s, @"^\d+$").Success;
+    }
+    static string ConvertInfix2Postfix(string inputExpression)  // Chuyển đổi biểu thức trung tố --> hậu tố
+    {
+        string postFix = "";
+        Stack<string> myStack = new Stack<string>();
+        FormatExpression(ref inputExpression);
+        string[] sArr = inputExpression.Split(" ");
+        foreach (string ele in sArr)
+        {
+            if (IsOperand(ele))
+                postFix += ele + " ";
+            else if (ele == "(")
+                myStack.Push(ele);
+            else if (ele == ")")
+            {
+                string temp = myStack.Pop();
+                while (temp != "(")
+                {
+                    postFix += temp + " ";
+                    temp = myStack.Pop();
+                }
+            }
+            else
+            {
+                while (myStack.Count > 0 && Priority(ele) <= Priority(myStack.Peek()))
+                    postFix += myStack.Pop() + " ";
+                myStack.Push(ele);
+            }
+        }
+
+        while (myStack.Count > 0)
+            postFix += myStack.Pop() + " ";
+        postFix = postFix.Trim();
+
+        return postFix;
+    }
+    static float CalPostfix(string postfix)     // Tính giá trị của biểu thức hậu tố
+    {
+        Stack<float> stack = new Stack<float>();
+        string[] postfixArr = postfix.Split(" ");
+        foreach (string ele in postfixArr)
+        {
+            if (IsOperand(ele))
+                stack.Push(Convert.ToSingle(ele));
+            else
+            {
+                float first = stack.Pop();
+                float second = stack.Pop();
+                switch (ele)
+                {
+                    case "+": 
+                        second += first; 
+                        break;
+                    case "-": 
+                        second -= first; 
+                        break;
+                    case "*": 
+                        second *= first; 
+                        break;
+                    case "/": 
+                        second /= first; 
+                        break;            
+                }
+                stack.Push(second);
+            }
+        }
+        return stack.Pop();
+    }
+    
+    static ArrayList ReadFile(string path)      // Đọc file html
+    {
+        ArrayList result = new ArrayList();
+        if (File.Exists(path))
+        {
+            StreamReader sReader = File.OpenText(path);
+            string s = "";
+            do
+            {
+                s = sReader.ReadLine();
+                result.Add(s);
+            }
+            while (!sReader.EndOfStream);
+            sReader.Close();
+        }
+        return result;
+    }
+    static string FormatHTML(ArrayList html)    // Định dạng lại file html (chỉ còn các tag)
+    {
+        html.ToArray(typeof (string));
+        string formating = "";
+        foreach (string item in html)
+            formating += item;
+        formating = formating.Trim();
+        Regex trimmer = new Regex(@"\s+");
+        formating = trimmer.Replace(formating, "");
+        string formated = "";
+        int begin = 0;
+        for (int i = begin; i < formating.Length; i++)
+        {
+            if (formating[i] == '<')
+            {
+                int end = formating.IndexOf('>', i);
+                for (int j = i; j <= end; j++)
+                    formated += formating[j];
+                formated += " ";
+                begin = end++;
+            }
+        }
+        formated = formated.TrimEnd();
+
+        return formated;
+    }
+    static void HTMLQueue(string html)
+    {
+        string[] arr = html.Split(" ");
+        Queue<string> Tags = new Queue<string>();
+        foreach (string item in arr)
+            Tags.Enqueue(item);
+        // foreach (string item in Tags)
+        //     Console.WriteLine(item);
+        Stack<string> myStack = new Stack<string>();
+        int tagsLength = Tags.Count;
+        int errorCount = 0;
+        for (int i = 0; i < tagsLength; i++)
+        {
+            string x = Tags.Dequeue();
+            string y = Tags.Peek();
+            if (!x.Contains('/'))
+            {
+                if (!y.Contains('/'))
+                    myStack.Push(x);
+                else
+                {
+                    string a = "";
+                    string b = "";
+                    for (int j =  1; j < x.IndexOf('>'); j++)
+                    {
+                        a += x[j];
+                    }
+                    for (int j =  2; j < y.IndexOf('>'); j++)
+                    {
+                        b += y[j];
+                    }
+                    if (a != b)
+                    {
+                        errorCount++;
+                        Console.WriteLine($"Thẻ mở <{a}> và thẻ đóng </{b}> không khớp nhau");
+                        break;
+                    }
+                }
+            }
+            else if (x.Contains('/'))
+            {
+                if (y.Contains('/'))
+                {
+                    string z = "";  // khai báo cho đủ bộ để sử dụng TryPeek :D
+                    string a = "";
+                    string b = "";
+                    if (!myStack.TryPeek(out z))
+                    {
+                        errorCount++;
+                        Console.WriteLine($"Thiếu thẻ mở");
+                        break;
+                    }
+                    string temp = myStack.Pop();
+                    for (int j = 2; j < y.IndexOf('>'); j++)
+                        a += y[j];
+                    for (int j = 1; j < temp.IndexOf('>'); j++)
+                    {
+                        b += temp[j];
+                    }
+                    if (a != b)
+                    {
+                        errorCount++;
+                        Console.WriteLine($"Thẻ mở <{b}> và thẻ đóng </{a}> không khớp nhau");
+                        break;
+                    }
+                    if (Tags.Count == 1) break;
+                }
+            }
+        }
+        if (errorCount == 0) Console.WriteLine("Thẻ đóng, mở phù hợp");
+    }
+    static void Main(string[] args)
+    {
+        Console.Clear();
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        Console.WriteLine("----- Bài tập Stack -----");
+        string a = "(19 + 5)*7 - (16  / 3) + 2";
+        Console.WriteLine($"Biểu thức hậu tố có dạng: {ConvertInfix2Postfix(a)}");
+        Console.WriteLine($"Giá trị của biểu thức hậu tố trên: {CalPostfix(ConvertInfix2Postfix(a))}");
+        Console.WriteLine();
+        Console.WriteLine("----- Bài tập Queue -----");
+        ArrayList html = ReadFile("html.txt");
+        Console.WriteLine(FormatHTML(html));
+        HTMLQueue(FormatHTML(html));
+
+    }
+}
