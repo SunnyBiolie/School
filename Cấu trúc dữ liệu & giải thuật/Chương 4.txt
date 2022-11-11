@@ -1,0 +1,175 @@
+using System;
+using System.Collections;
+using System.Text.RegularExpressions;
+
+namespace Chuong4
+{
+    class Program
+    {
+        static int SeqSearch(int[] arr, int value)
+        {
+            for (int i = 0; i < arr.Length; i++)
+                if (arr[i] == value) return i;
+            return -1;
+        }
+        static int RecuSearch(int[] arr, int startIndex, int value)
+        {
+            if (arr.Length == 0 || startIndex >= arr.Length) return -1;
+            if (arr[startIndex] == value) return startIndex;
+            else return RecuSearch(arr, ++startIndex, value);
+        }
+        static int SenSearch(int[] arr, int value)
+        {
+            int x = arr[arr.Length - 1];
+            arr[arr.Length - 1] = value;
+            int i = 0;
+            foreach (int item in arr)
+            {
+                if (item == value) break;
+                i++;
+            }
+            arr[arr.Length - 1] = x;            
+            if (i < arr.Length - 1 || arr[arr.Length - 1] == value) return i;
+            else return -1;
+        }
+        static int BinSearch(int[][] arr, int value)
+        {
+            int min = 0, max = arr[0].Length - 1;
+            again:;
+            if (min > max) return -1;
+            else
+            {
+                int mid = (int)Math.Floor((decimal)(max + min) / 2);
+                if (arr[0][mid] > value)
+                {
+                    max = mid - 1;
+                    goto again;
+                }
+                else if (arr[0][mid] < value)
+                {
+                    min = mid + 1;
+                    goto again;
+                }
+                else return arr[1][mid];
+            }
+        }
+        static int[][] SortArr(int[] arr) // gộp mảng được sắp xếp với mảng index được sắp xếp thành mảng 2 chiều
+        {
+            int[] index = new int[arr.Length];
+            for (int i = 0; i < index.Length; i++)
+                index[i] = i;
+
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                for (int j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[i] > arr[j])
+                    {
+                        int temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                        temp = index[i];
+                        index[i] = index[j];
+                        index[j] = temp;
+                    }
+                }
+            }
+
+            int[][] sortArrIndex = new int[2][];
+            sortArrIndex[0] = new int[arr.Length];
+            sortArrIndex[1] = new int[index.Length];
+
+            for (int i = 0; i < arr.Length; i++)
+                sortArrIndex[0][i] = arr[i]; 
+            for (int i = 0; i < index.Length; i++)
+                sortArrIndex[1][i] = index[i];
+            
+            return sortArrIndex;
+        }
+        static void Main(string[] args)
+        {
+            Console.Clear();
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+            Random r = new Random();
+            int[] arr = new int[10000];
+            for (int i = 0; i < arr.Length; i++)
+                arr[i] = r.Next(1, 100);
+
+            int value = 100;
+            arr[arr.Length - 1] = value; 
+
+            Timing timer = new Timing();
+            
+            Console.Write("SeqSearch: ");
+            timer.StartTime();
+            SeqSearch(arr, value);
+            timer.StopTime();
+            Console.WriteLine(timer.Result().TotalMilliseconds + "ms");
+            
+            Console.Write("RecuSearch: ");
+            timer.StartTime();
+            RecuSearch(arr, 0, value);
+            timer.StopTime();
+            Console.WriteLine(timer.Result().TotalMilliseconds + "ms");
+            
+            Console.Write("SenSenSearch: ");
+            timer.StartTime();
+            SenSearch(arr, value);
+            timer.StopTime();
+            Console.WriteLine(timer.Result().TotalMilliseconds + "ms");
+
+            Console.Write("BinSearch: ");
+            timer.StartTime();
+            int[][] arr2 = (int[][])SortArr(arr).Clone();
+            BinSearch(arr2, value);
+            timer.StopTime();
+            Console.WriteLine(timer.Result().TotalMilliseconds + "ms");
+
+            Console.WriteLine("-----------------------");
+
+            SinhVien khoaIT = new SinhVien();
+
+            khoaIT.SeqSearch(khoaIT.id, khoaIT.name, khoaIT.avgScore, 100);
+            
+        }
+    }
+    public class SinhVien
+    {
+        Random r = new Random();
+        public int[] id = new int[100];
+        
+        public string[] name = new string[100];
+
+        public float[] avgScore = new float[100];
+        public SinhVien()
+        {
+            for (int i = 0; i < id.Length; i++)
+                id[i] = i + 1;
+            for (int i = 0; i < name.Length; i++)
+            {
+                char c;
+                for (int j = 0; j <= 5; j++)
+                {
+                    c = Convert.ToChar(Convert.ToInt32(r.Next(97, 122)));
+                    name[i] += c;
+                }
+            }
+            name[99] = "Pham Khoa";
+            for (int i = 0; i < avgScore.Length; i++)
+                avgScore[i] = (float)Math.Round(r.NextSingle() * 100) / 10;
+            avgScore[99] = 9.4f;
+        }
+        public void SeqSearch(int[] id, string[] name, float[] score, int value)
+        {
+            int index = -1;
+            for (int i = 0; i < id.Length; i++)
+            {
+                if (id[i] == value) index = i;
+            }
+                Console.WriteLine("Tên sinh viên: " + name[index]);
+                Console.WriteLine("Điểm trung bình: " + score[index]);
+                Console.WriteLine($"ID sinh viên: {index + 1}");
+        }
+    }
+}
