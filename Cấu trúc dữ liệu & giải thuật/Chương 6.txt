@@ -1,0 +1,269 @@
+using System;
+using System.Collections.Generic;
+
+namespace School_CTDL_GT
+{
+	class Chuong6
+	{
+	    public class Node
+		{
+			public object element;
+			public Node next;
+			public Node()
+			{
+				element = null;
+            	next = null;
+			}
+			public Node(object element)
+			{
+				this.element = element;
+				next = null;
+			}
+		}
+		public class LinkedList
+		{
+			public Node header;
+			public LinkedList()
+            {
+                header = new Node("Header");
+			}
+			private Node Find(object element)
+			{
+				Node current = header;
+				while (current.element != element)
+					current = current.next;
+				return current;
+			}
+			public Node FindPrev(object element)
+			{
+				Node current = header;
+				while (current.next != null && current.next.element != element)
+					current = current.next;
+				return current;
+			}
+			public void Delete(object element)
+         {
+				Node current = FindPrev(element);
+				if (current.next != null)
+					current.next = current.next.next;
+				else current.next = null;	
+			}
+			public void Print()
+			{
+				Node current = header;
+				while (current.next != null)
+				{
+					Console.Write($"{current.next.element} --> ");
+					current = current.next;
+				}
+				Console.WriteLine();
+			}
+			public void AddAfter(object newElement, object afterElement)
+			{
+				Node current = new Node();
+				Node newNode = new Node(newElement);
+				current = Find(afterElement);
+				newNode.next = current.next;
+				current.next = newNode;
+			}
+			public void AddFirst(object newElement)
+			{
+				Node newNode = new Node(newElement);
+				newNode.next = header.next;
+				header.next = newNode;
+			}
+			public void AddLast(object newElement)
+         {
+				Node current = header;
+				Node newNode = new Node(newElement);
+				while (current.next != null)
+					current = current.next;
+				current.next = newNode;
+			}
+			public void AddBefore(object newElement, object beforeElement)
+			{
+				Node current = FindPrev(beforeElement);
+				Node newNode = new Node(newElement);
+				newNode.next = current.next;
+				current.next = newNode;
+			}
+			public void DeleteFirst()	// lưu ý
+			{
+				Node current = header.next;
+				header.next = header.next.next;
+            current = null;
+			}
+			public int FindMax()
+			{
+				Node current = header.next;
+            int max = Convert.ToInt32(current.element);
+				while (current.next != null)
+            {
+					current = current.next;
+					if (max < Convert.ToInt32(current.element))
+						max = Convert.ToInt32(current.element);
+				}
+				return max;
+			}
+		}
+		public class Node2
+		{
+			public object element;
+			public Node2 flink, blink;
+			public Node2()
+			{
+				element = null;
+            	flink = blink = null;
+			}
+			public Node2(object element)
+			{
+				this.element = element;
+            	flink = blink = null;
+			}
+		}
+		public class DoubleLinkedList
+		{
+			public Node2 header;
+			public DoubleLinkedList()
+			{
+				header = new Node2("Header");
+			}
+			private Node2 Find(object element)
+			{
+				Node2 current = header;
+				while (current.element!= element)
+                    current = current.flink;
+				return current;	
+			}
+			public Node2 FindLast()
+            {
+                Node2 current = header;
+                while (current.flink != null)
+                    current = current.flink;
+                return current;
+            }
+            public void Delete(object element)
+			{
+				Node2 current = Find(element);
+				if (current.flink != null)
+				{
+					current.blink.flink = current.flink;
+                    current.flink.blink = current.blink;
+                    current.flink = null;
+                    current.blink = null;
+				}
+                else
+                {
+                    current.blink.flink = null;
+                    current.blink = null;
+                }
+			}
+			public void Print()
+            {
+                Node2 current = header.flink;
+                while (current.flink != null)
+                {
+                    Console.Write($"{current.element} --> ");
+                    current = current.flink;
+                }
+            }
+            public void PrintReverse()
+            {
+                Node2 current = FindLast();
+                while (current.blink != null)
+                {
+                    Console.Write(current.element);
+                    current = current.blink;
+                }
+            }
+            public int Count()
+            {
+                int count = 0;
+                Node2 current = header;
+                while (current.flink != null)
+                {
+                    current = current.flink;
+                    count++;
+                }
+                return count;
+            }
+            public int Sum()
+            {
+                int sum = 0;
+                Node2 current = header;
+                while (current.flink != null)
+                {
+                    current = current.flink;
+                    sum += Convert.ToInt32(current.element);
+                }
+                return sum;
+            }
+            public void AddAfter(object newElement, object afterElement)
+			{
+				Node2 current = Find(afterElement);
+				Node2 newNode = new Node2(newElement);
+				newNode.flink = current.flink;
+				newNode.blink = current;
+				current.flink = newNode;
+			}
+		}
+        static void Main(string[] args)
+		{
+            Console.Clear();
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+		
+            LinkedList book1 = new LinkedList();
+            book1.AddAfter("Name: The Godfather", "Header");
+            book1.AddAfter("Author: Mario Puzo", "Name: The Godfather");
+            book1.AddAfter("Nation: America", "Author: Mario Puzo");
+            book1.AddAfter("Release: 1969","Nation: America");
+            book1.Print();
+
+			DoubleLinkedList serieBook = new DoubleLinkedList();
+			serieBook.AddAfter("Harry Potter and the Sorcerer's Stone", "Header");
+			serieBook.AddAfter("Harry Potter and the Chamber of Secrets", "Harry Potter and the Sorcerer's Stone");
+			serieBook.AddAfter("Harry Potter and the Prisoner of Azkaban", "Harry Potter and the Chamber of Secrets");
+			serieBook.AddAfter("Harry Potter and the Goblet of Fire", "Harry Potter and the Prisoner of Azkaban");
+			serieBook.AddAfter("Harry Potter and the Order of the Phoenix", "Harry Potter and the Goblet of Fire");
+			serieBook.AddAfter("Harry Potter and the Half-Blood Prince", "Harry Potter and the Order of the Phoenix");
+			serieBook.AddAfter("Harry Potter and the Deathly Hallows", "Harry Potter and the Half-Blood Prince");
+			serieBook.Print();
+            Console.WriteLine();
+
+			LinkedListNode<string> node1 = new LinkedListNode<string>("Hà Nội");
+			LinkedListNode<string> node2 = new LinkedListNode<string>("Phủ Lý");
+			LinkedListNode<string> node3 = new LinkedListNode<string>("Nam Định");
+			LinkedListNode<string> node4 = new LinkedListNode<string>("Ninh Bình");
+			LinkedListNode<string> node5 = new LinkedListNode<string>("Thanh Hóa");
+			LinkedListNode<string> node6 = new LinkedListNode<string>("Vinh");
+			LinkedListNode<string> node7 = new LinkedListNode<string>("Hương Phố");
+			LinkedListNode<string> node8 = new LinkedListNode<string>("Đồng Hới");
+			LinkedListNode<string> node9 = new LinkedListNode<string>("Đông Hà");
+			LinkedListNode<string> node10 = new LinkedListNode<string>("Huế");
+
+            LinkedList<string> trainSE1 = new LinkedList<string>();
+            trainSE1.AddLast(node1);
+            trainSE1.AddLast(node2);
+            trainSE1.AddLast(node3);
+            trainSE1.AddLast(node4);
+            trainSE1.AddLast(node5);
+            trainSE1.AddLast(node6);
+            trainSE1.AddLast(node7);
+            trainSE1.AddLast(node8);
+            trainSE1.AddLast(node9);
+            trainSE1.AddLast(node10);
+
+            string[] SE2 = { "Sài gòn", "Biên Hòa", "Bình Thuận", "Tháp Chàm", "Nha Trang", "Tuy Hòa", "Diêu Trì", "Bồng Sơn", "Quảng Ngãi", "Tam Kỳ", "Đà Nẵng", "Huế", "Đông Hà", "Đông Hà", "Đồng Hới", "Đồng Lê", "Hương Phố", "Yên Trung", "Vinh", "Thanh Hóa", "Ninh Bình", "Nam Định", "Phủ Lý", "Hà Nội" };
+            LinkedList<string> trainSE2 = new LinkedList<string>(SE2);
+
+            foreach (string ele in trainSE1)
+                Console.Write(ele + " --> ");
+            Console.WriteLine();
+            foreach (string ele in trainSE2)
+                Console.Write(ele + " --> ");
+            Console.WriteLine();
+
+            Console.ReadKey();
+        }
+    }
+}
