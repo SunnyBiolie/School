@@ -1,0 +1,118 @@
+using static System.Console;
+using System.Linq;
+using System.Text;
+using System.Collections.Generic;
+namespace School_CTDL_GT
+{
+    class Chuong5
+    {
+        static void Main(string[] args)
+        {
+            Console.Clear();
+            Console.WriteLine("----------Start----------");
+            OutputEncoding = Encoding.UTF8;
+            const int n = 10;
+            int[] arr = new int[n] {2, 1, 1, 2, 3, 3, 3, 1, 2, 2};
+            int[] index = new int[n];
+            for (int i = 0; i < n; i++)
+                index[i] = i;
+           
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+            Sort(arr, index, 0, 9);
+            for (int i = 0; i < index.Length; i++)
+                Console.Write(index[i] + "  ");
+            Console.WriteLine();
+
+            Console.WriteLine("Thuật toán có tính ổn định");
+            
+            Console.ReadLine();
+        }
+        static void Sort(int[] inputArr, int[] index, int left, int right)
+        {
+            if (left < right)
+            {
+                int mid = (left + right) / 2;
+                Sort(inputArr, index, left, mid);
+                Sort(inputArr, index, mid + 1, right);
+                Merge(inputArr, index, left, mid, right);
+            }
+        }
+        static void Merge(int[] arr, int[] index, int left, int mid, int right)
+        {
+            int z = left;
+            int[] leftArr = new int[mid - left + 1];
+            int[] rightArr = new int[right - mid];
+            Array.Copy(arr, left, leftArr, 0, mid - left + 1);
+            Array.Copy(arr, mid + 1, rightArr, 0, right - mid);
+
+            int[] lindex = new int[mid - left + 1];
+            int[] rindex = new int[right - mid];
+            Array.Copy(index, left, lindex, 0, mid - left + 1);
+            Array.Copy(index, mid + 1, rindex, 0, right - mid);
+            int i = 0, j = 0;
+
+            for (int k = left; k < right + 1; k++)
+            {
+                if (i == leftArr.Length)
+                {
+                    arr[k] = rightArr[j];
+                    index[k] = rindex[j];
+                    j++;
+                }
+                else if (j == rightArr.Length)
+                {
+                    arr[k] = leftArr[i];
+                    index[k] = lindex[i];
+                    i++;
+                }
+                else if (leftArr[i] <= rightArr[j])
+                {
+                    arr[k] = leftArr[i];
+                    index[k] = lindex[i];
+                    i++;
+                }
+                else
+                {
+                    arr[k] = rightArr[j];
+                    index[k] = rindex[j];
+                    j++;
+                }
+            }  
+        }
+    }
+}
