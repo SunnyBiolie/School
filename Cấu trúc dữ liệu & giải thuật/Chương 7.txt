@@ -1,0 +1,170 @@
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
+
+namespace School_CTDL_GT
+{
+    class Chuong7
+    {
+        static void Main(string[] args)
+        {
+            Console.Clear();
+            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
+            
+            Console.WriteLine("-------------------- 1 --------------------");
+            ArrayList contact = ReadFile(@"stringFile/contact.txt");
+            Dictionary<string, string> contacts = FormatContact(contact);
+            Console.WriteLine(NameSearch(contacts, "Benzen"));
+            Console.WriteLine(NumberSearch(contacts, "0907026759"));
+
+            Console.WriteLine("-------------------- 2 --------------------");
+            Hashtable myDictionary = new Hashtable();
+            MyDictionary(ref myDictionary);
+            ArrayList sCheck = ReadFile(@"stringFile/spellcheck.txt");
+            bool check = SpellCheck(sCheck, myDictionary);
+            if (check) Console.WriteLine("Các ký tự đúng chính tả");
+            else Console.WriteLine("Có ký tự sai chính tả");
+
+
+
+            Console.ReadKey();
+        }
+        static string NameSearch(Dictionary<string, string> contacts, string name)
+        {
+            foreach (KeyValuePair<string, string> kvp in contacts)
+            {
+                if (kvp.Key.Equals(name))
+                {
+                    return $"Số điện thoại liên hệ của {name} là: {kvp.Value}";
+                }
+            }
+            return $"Không tồn tại người liên hệ tên {name}";
+        }
+        static string NumberSearch(Dictionary<string, string> contacts, string number)
+        {
+            foreach (KeyValuePair<string, string> kvp in contacts)
+            {
+                if (kvp.Value.Equals(number))
+                {
+                    return $"Chủ nhân của số điện thoại {number} là: {kvp.Key}";
+                }
+            }
+            return $"Không tồn tại số điện thoại {number}";
+        }
+        static ArrayList ReadFile(string path)
+        {
+            ArrayList result = new ArrayList();
+            if (File.Exists(path))
+            {
+                StreamReader sReader = File.OpenText(path);
+                string s = "";
+                do
+                {
+                    s = sReader.ReadLine();
+                    result.Add(s);
+                }
+                while (!sReader.EndOfStream);
+                sReader.Close();
+            }
+            return result;
+        }
+        static Dictionary<string, string> FormatContact(ArrayList contacts) // chuyển dữ liệu từ file văn bản thành dictionary
+        {   // file văn bản có dạng
+            //SunnyBiolie 0917372476
+            //David 2848576310
+            //Lukas 6649571768
+            //Chris 1478098395
+            string formating = "";
+            foreach (string item in contacts)
+                formating += item + " ";
+            formating = formating.Trim();
+            Regex trimmer = new Regex(@"\s+");
+            formating = trimmer.Replace(formating, " ");
+            string[] datas = formating.Split(" ");
+            string[][] datas2C = new string[2][];
+            datas2C[0] = new string[datas.Length / 2];
+            datas2C[1] = new string[datas.Length / 2];
+            int k = 0;
+            for (int i = 0; i < datas.Length; i+=2)
+            {
+                datas2C[0][k] = datas[i];
+                k++;
+            }
+            k = 0;
+            for (int i = 1; i < datas.Length; i+=2)
+            {
+                datas2C[1][k] = datas[i];
+                k++;
+            }
+            Dictionary<string, string> contactsData = new Dictionary<string, string>();
+            for (int i = 0; i < datas2C[0].Length; i++)
+            {
+                contactsData.Add($"{datas2C[0][i]}", $"{datas2C[1][i]}");
+            }
+            
+            return contactsData;
+        }
+    
+        static void MyDictionary(ref Hashtable myDictionary)
+        {
+            myDictionary = new Hashtable();
+            string[] a = { "a", "as", "am", "active", "and", "ate", "apple", "at"};
+            string[] b = { "b", "blind", "born", "but", "break", "bye", "best" };
+            string[] c = { "c", "candy", "catch", "create", "can", "can't", "control" };
+            string[] d = { "d", "deserve", "duck", "don't", "danger" };
+            string[] s = { "s", "selfish", "see", "sure"};
+            string[] i = { "i", "i'm", "impatient", "insecure", "if" };
+            string[] m = { "m", "make", "mistakes", "my", "me" };
+            string[] h = { "h", "hell", "help", "handle", "hard" };
+            string[] y = { "y", "you", "your" };
+            string[] t = { "t", "times", "title", "to", "then" };
+            string[] o = { "o", "out", "of", "on" };
+            string[] l = { "l", "little", "line", "lion" };
+            string[] w = { "w", "world", "worst", "win" };
+            myDictionary.Add('a', a);
+            myDictionary.Add('b', b);
+            myDictionary.Add('c', c);
+            myDictionary.Add('d', d);
+            myDictionary.Add('s', s);
+            myDictionary.Add('i', i);
+            myDictionary.Add('m', m);
+            myDictionary.Add('h', h);
+            myDictionary.Add('y', y);
+            myDictionary.Add('t', t);
+            myDictionary.Add('o', o);
+            myDictionary.Add('l', l);
+            myDictionary.Add('w', w);
+        }
+        static bool SpellCheck(ArrayList arr, Hashtable myDictionary)
+        {
+            //file văn bản có dạng
+            //i'm selfish impatient and a little insecure i make mistakes i am out of control and at times hard to handle but if you can't handle me at my worst then you sure as hell don't deserve me at my best
+            string formating = "";
+            foreach (string item in arr)
+                formating += item + " ";
+            formating = formating.Trim();
+            Regex trimmer = new Regex(@"\s+");
+            formating = trimmer.Replace(formating, " ");
+            string[] strArr = formating.Split(" ");
+            string[] alpha;
+            bool check = false;
+            for (int i = 0; i < strArr.Length; i++)
+            {
+                check = false;
+                foreach(DictionaryEntry kvp in myDictionary)
+                {
+                    if ((char)kvp.Key == strArr[i][0])
+                    {
+                        alpha = (string[])kvp.Value;
+                        foreach (string item in alpha)
+                            if (strArr[i] == item) check = true;
+                    }
+                }
+                if (check == false) break;
+            }
+            return check;
+        }
+    }
+}
