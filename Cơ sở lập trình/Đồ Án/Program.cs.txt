@@ -1,0 +1,328 @@
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace ProjectCSLT
+{
+    class Program
+    {
+        static void EIVLog() //ErrorInputValue
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("\t<< Dữ liệu không hợp lệ, vui lòng nhập lại\n");
+            Console.ResetColor();
+        }
+        static void Menu()
+        {
+        menu:
+            Console.WriteLine("\n{0, 70}", "ĐỒ ÁN: CƠ SỞ LẬP TRÌNH");
+            Console.WriteLine("{0, 84}", "SINH VIÊN: PHẠM NGUYỄN CHÍ KHOA, LỚP: SE001");
+            Console.WriteLine("{0, 92}", "---------------------------------------------------------------");
+            Console.WriteLine("\tBài 1: Nhập vào một số N nguyên dương. Cho biết N có phải là bội số của 3 và 5 không?");
+            Console.WriteLine("\tBài 2: 𝑃 = 1 / (√1 + √2 + √3 + √4)   (Với √ là căn bậc n + 1 = 4).");
+            Console.WriteLine("\tBài 3: Sắp xếp các phần tử trong một mảng gồm n số nguyên theo thứ tự từ nhỏ đến lớn.");
+            Console.WriteLine("\tBài 4: Nhập các phần tử của một ma trận vuông cấp n, in ra ma trận chuyển vị của nó.");
+            Console.WriteLine("\tBài 5: Nhập chuỗi chứa đầy đủ họ, tên lót và tên. Tách tên ra khỏi họ và tên lót sau đó in lại đầy đủ họ, \r\n\ttên lót và tên trong một khoảng rộng 40 vị trí trong đó họ và tên lót canh trái, tên canh phải.");
+            Console.WriteLine("\tBài 6: Cho mảng nhiều chiều gồm có các thông tin liên quan đến khách lưu trú ở khách sạn. Khách gồm các \r\n\tthông tin: họ tên, số ngày ở, số bữa ăn, tiền ở (1 ngày), tiền ăn (1 bữa), phí phục vụ. Phân tích và viết \r\n\tchương trình tính tiền trọ khách sạn");
+            Console.WriteLine("{0, 92}", "---------------------------------------------------------------");
+            Console.WriteLine();
+
+        again:
+            Console.WriteLine("\tNhập 1-6 để lựa chọn bài toán tương ứng hoặc nhập 0 để kết thúc chương trình");
+            Console.Write("\t>> ");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
+            {
+                case "1":
+                    Console.Clear();
+                    Bai1();
+                    goto menu;
+                case "2":
+                    Console.Clear();
+                    Bai2();
+                    goto menu;
+                case "3":
+                    Console.Clear();
+                    Bai3();
+                    goto menu;
+                case "4":
+                    Console.Clear();
+                    Bai4();
+                    goto menu;
+                case "5":
+                    Console.Clear();
+                    Bai5();
+                    goto menu;
+                case "6":
+                    Console.Clear();
+                    Bai6();
+                    goto menu;
+                case "0":
+                    break;
+                default:
+                    EIVLog();
+                    goto again;
+            }
+        }
+        static void BackToMenu()
+        {
+            Console.WriteLine("\n << Nhấn bất kỳ phím nào để quay lại màn hình chính");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        static void Bai1()
+        {
+            Console.WriteLine("\n Bài 1: Nhập vào một số N nguyên dương. Cho biết N có phải là bội số của 3 và 5 không?");
+        bai1:
+            Console.Write("\tNhập số nguyên dương N: >> ");
+            try
+            {
+                uint n = Convert.ToUInt32(Console.ReadLine());
+                if (n % 15 == 0) Console.WriteLine($"\t<< N = {n} là bội số của 3 và 5");
+                else Console.WriteLine($"\t<< N = {n} không là bội số của 3 và 5");
+            }
+            catch (Exception)
+            {
+                EIVLog();
+                goto bai1;
+            }
+            BackToMenu();
+        }
+        static void Bai2()
+        {
+            //STT: 13 --> n = 3;
+            Console.WriteLine("\n Bài 2: 𝑃 = 1 / (√1 + √2 + √3 + √4)   (Với √ là căn bậc n + 1 = 4).");
+            double result = Math.Pow(4, (double)1 / 4);
+            for (int i = 3; i > 0; i--)
+            {
+                result += i;
+                result = Math.Pow(result, (double)1 / 4);
+            }
+            Console.WriteLine($"\t<< Kết quả của 𝑃 = {1 / result}");
+            BackToMenu();
+        }
+        static void Bai3()
+        {
+            Console.WriteLine("\n Bài 3: Sắp xếp các phần tử trong một mảng gồm n số nguyên theo thứ tự từ nhỏ đến lớn.");
+
+        bai3:
+            Console.Write("\tNhập 1 để tạo ra một mảng ngẫu nhiên (giá trị khoảng 1-1000) hoặc nhập 2 để tự nhập mảng: >> ");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
+            {
+                case "1":
+                    Random r = new Random();
+                bai3case1:
+                    try
+                    {
+                        Console.Write("\tNhập số phần tử của mảng: >> ");
+                        uint n = Convert.ToUInt32(Console.ReadLine());
+                        if (n == 0)
+                        {
+                            EIVLog();
+                            goto bai3case1;
+                        }
+                        int[] intArr = new int[n];
+                        for (int i = 0; i < n; i++)
+                            intArr[i] = r.Next(1, 1000);
+                        Console.Write("\tMảng đã được khởi tạo ngẫu nhiên:\n\t\t");
+                        foreach (var element in intArr)
+                            Console.Write($"[{element}]");
+                        for (int i = 0; i < n - 1; i++)
+                        {
+                            for (int j = i + 1; j < n; j++)
+                            {
+                                if (intArr[i] > intArr[j])
+                                {
+                                    int temp = intArr[i];
+                                    intArr[i] = intArr[j];
+                                    intArr[j] = temp;
+                                }
+                            }
+                        }
+                        Console.Write("\n\tThứ tự các phần tử của mảng sau khi sắp xếp (tăng dần) là:\n\t\t");
+                        foreach (var element in intArr)
+                            Console.Write($"[{element}]");
+                    }
+                    catch (Exception)
+                    {
+                        EIVLog();
+                        goto bai3case1;
+                    }
+                    Console.WriteLine();
+                    break;
+                case "2":
+                bai3case2:
+                    try
+                    {
+                        Console.Write("\tNhập số phần tử của mảng: >> ");
+                        uint n = Convert.ToUInt32(Console.ReadLine());
+                        if (n == 0)
+                        {
+                            EIVLog();
+                            goto bai3case2;
+                        }
+                        int[] intArr = new int[n];
+                        Console.WriteLine("\tNhập giá trị cho mảng: ");
+                        for (int i = 0; i < n; i++)
+                        {
+                        bai3case2input:
+                            try
+                            {
+                                Console.Write($"\t\tPhần tử thứ {i + 1}: >> ");
+                                intArr[i] = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (Exception)
+                            {
+                                EIVLog();
+                                goto bai3case2input;
+                            }
+                        }
+                        for (int i = 0; i < n - 1; i++)
+                        {
+                            for (int j = i + 1; j < n; j++)
+                            {
+                                if (intArr[i] > intArr[j])
+                                {
+                                    int temp = intArr[i];
+                                    intArr[i] = intArr[j];
+                                    intArr[j] = temp;
+                                }
+                            }
+                        }
+                        Console.Write("\n\tThứ tự các phần tử của mảng sau khi sắp xếp (tăng dần) là:\n\t\t");
+                        foreach (var element in intArr)
+                            Console.Write($"[{element}]");
+                        Console.WriteLine();
+                    }
+                    catch (Exception)
+                    {
+                        EIVLog();
+                        goto bai3case2;
+                    }
+                    break;
+                default:
+                    EIVLog();
+                    goto bai3;
+            }
+            BackToMenu();
+        }
+        static void Bai4()
+        {
+            Console.WriteLine("\n Bài 4: Nhập các phần tử của một ma trận vuông cấp n, in ra ma trận chuyển vị của nó.");
+        bai4:
+            try
+            {
+                Console.Write("\tNhập số hàng và cột của ma trận vuông: >> ");
+                uint n = Convert.ToUInt32(Console.ReadLine());
+                if (n == 0)
+                {
+                    EIVLog();
+                    goto bai4;
+                }
+                Console.WriteLine($"\tNhập giá trị từng phần tử của ma trận vuông cấp {n}:");
+                int[][] intMatrix = new int[n][];
+                for (int i = 0; i < n; i++)
+                {
+                    intMatrix[i] = new int[n];
+                    for (int j = 0; j < n; j++)
+                    {
+                    bai4input:
+                        try
+                        {
+                            Console.Write($"\t\tNhập giá trị cho phần tử [{i}][{j}]: >> ");
+                            intMatrix[i][j] = Convert.ToInt32(Console.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            EIVLog();
+                            goto bai4input;
+                        }
+                    }
+                }
+                Console.WriteLine("\n\tMa trận vừa được nhập có dạng:");
+                for (int i = 0; i < n; i++)
+                {
+                    Console.Write("\t");
+                    for (int j = 0; j < n; j++)
+                    {
+                        Console.Write($"{intMatrix[i][j],5}");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine("\n\tMa trận chuyển vị của ma trận trên là:");
+                for (int i = 0; i < n; i++)
+                {
+                    Console.Write("\t");
+                    for (int j = 0; j < n; j++)
+                    {
+                        Console.Write($"{intMatrix[j][i],5}");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            catch (Exception)
+            {
+                EIVLog();
+                goto bai4;
+            }
+            BackToMenu();
+        }
+        static void Bai5()
+        {
+            Console.WriteLine("\n Bài 5: Nhập chuỗi chứa đầy đủ họ, tên lót và tên. Tách tên ra khỏi họ và tên lót sau đó in lại đầy đủ họ, \r\n\ttên lót và tên trong một khoảng rộng 40 vị trí trong đó họ và tên lót canh trái, tên canh phải.");
+            Console.Write("\n\tNhập họ tên của bạn: >> ");
+            string userInput = Console.ReadLine();
+            userInput = userInput.Trim();
+            Regex trimmer = new Regex(@"\s+"); // Xóa khoảng trắng thừa trong chuỗi
+            userInput = trimmer.Replace(userInput, " ");
+            string[] strArr = userInput.Split(" ");
+            string[] newArr = new string[strArr.Length - 1];
+            for (int i = 0; i < newArr.Length; i++)
+                newArr[i] = strArr[i];
+            string result = string.Join(" ", newArr);
+            int frontLength = result.Length;
+            int backLength = strArr[strArr.Length - 1].Length;
+            for (int i = 0; i < 40 - frontLength - backLength; i++)
+                result += " ";
+            result += strArr[strArr.Length - 1];
+            Console.WriteLine($"\t<< {result}");
+            BackToMenu();
+        }
+        static void Bai6()
+        {
+            Console.WriteLine("\n Bài 6: Cho mảng nhiều chiều gồm có các thông tin liên quan đến khách lưu trú ở khách sạn. Khách gồm các \r\n\tthông tin: họ tên, số ngày ở, số bữa ăn, tiền ở (1 ngày), tiền ăn (1 bữa), phí phục vụ. Phân tích và viết \r\n\tchương trình tính tiền trọ khách sạn");
+            object[][] guestInfo = new object[5][];
+            guestInfo[0] = new object[6] { "Phạm Nguyễn Chí Khoa", 3, 5, 700000, 50000, 150000 };
+            guestInfo[1] = new object[6] { "Sunny Biolie", 7, 20, 500000, 40000, 150000 };
+            guestInfo[2] = new object[6] { "David Đặng", 5, 15, 800000, 50000, 150000 };
+            guestInfo[3] = new object[6] { "Nguyen Van A", 2, 0, 500000, 40000, 100000 };
+            guestInfo[4] = new object[6] { "Johnny Bug", 1, 2, 1000000, 70000, 200000 };
+            
+            for (int i = 0; i < guestInfo.Length; i++)
+            {
+                Console.WriteLine("\n\t***********************************************************************************");
+                Console.WriteLine("\tKhách sạn Five Starts");
+                Console.WriteLine("\tHóa đơn khách sạn");
+                Console.WriteLine($"\tQuí Ông(Bà): {guestInfo[i][0]}"); //khoang cach chua xu ly
+                Console.WriteLine($"\tSố ngày ở: {guestInfo[i][1]}" + $"{"", 13}" + $"Số bữa ăn: {guestInfo[i][2]}");
+                Console.WriteLine($"\tTiền ở: {guestInfo[i][3]}VNĐ" + $"{"", 8}" + $"Tiền ăn: {guestInfo[i][4]}VNĐ" + $"{"",8}" + $"Phí phục vụ: {guestInfo[i][5]}VNĐ");
+                Console.WriteLine($"\tTổng cộng: {((int)guestInfo[i][1] * (int)guestInfo[i][3]) + ((int)guestInfo[i][2] * (int)guestInfo[i][4]) + (int)guestInfo[i][4]}VNĐ");
+                Console.WriteLine($"\t\tHân hạnh phục vụ quý khách");
+                Console.WriteLine("\t***********************************************************************************");
+            }
+            BackToMenu();
+        }
+        static void Main(string[] args)
+        {
+            Console.Clear();
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.Title = "Đồ Án - Phạm Nguyễn Chí Khoa - 31211020279";
+
+            Menu();
+
+            // Console.ReadKey();
+		// Updated 11:00 Am, 26/10/2022
+        }
+    }
+}
