@@ -17,4 +17,5 @@
 			. Ngoài ra còn có các chi phí khác: phát triển và cải tiến hệ thống
 	- Phương pháp CNPM:
 		+ Bao gồm các mô hình hệ thống, ký pháp, quy tắc, hướng dẫn thiết kế và quy trình để xây dựng phần mềm một cách dễ dàng
-		+ 
+		+ Phân tích hướng cấu trúc tập trung vào việc xác định các chức năng cơ bản của hệ thống; pp hướng đối tượng tập trung vào định nghĩa các đối tượng và sự cộng tác giữa
+	- CASE (Computer-Aided Software Engineering)
