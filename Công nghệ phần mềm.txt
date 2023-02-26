@@ -18,4 +18,33 @@
 	- Phương pháp CNPM:
 		+ Bao gồm các mô hình hệ thống, ký pháp, quy tắc, hướng dẫn thiết kế và quy trình để xây dựng phần mềm một cách dễ dàng
 		+ Phân tích hướng cấu trúc tập trung vào việc xác định các chức năng cơ bản của hệ thống; pp hướng đối tượng tập trung vào định nghĩa các đối tượng và sự cộng tác giữa
-	- CASE (Computer-Aided Software Engineering)
+	- CASE (Computer-Aided Software Engineering): hỗ trợ các hoạt động trong quy trình xây dựng phần mềm
+		+ Upper-CASE công cụ hỗ trợ đặc tả và thiết kế
+		+ Lower-CASE hỗ trợ lập trình, gỡ lỗi và kiểm thử
+	- Phần mềm tốt: khả năng bảo trì, mức độ tin cậy, hiệu quả, khả năng được chấp nhận
+	- Các thách thức: không đồng nhất, chuyển giao, độ tin cậy
+	- Sự phát triển của phần mềm: 4 giai đoạn
+		+ 1: 1950-1960: chương trình nhỏ, tính toán chuyên dụng / Công nghệ: bóng điện tử
+			. Xử lý: số, theo lô
+			. Ngôn ngữ: mã máy, hợp ngữ
+		+ 2: giữ thập kỷ 70: đa nhiệm, đa người dùng / Công nghệ: bán dẫn
+			. Xử lý: số, ký tự, theo lô, thời gian thực
+			. Lưu trữ trực tuyến: CSDL
+			. Ngôn ngữ: có cấu trúc (PL1, Algol 60, Fortran, COBOL)
+		+ 3: đến 1990: phần mềm các nhân + mạng, hệ lớn, chia sẻ được, phần mềm nhúng / CN: mạch tích hợp lớn, vi mạch, internet, CSDL quan hệ
+			. Xử lý: sô, ký tự, âm thanh, hình ảnh, theo lô và thời gian thực, phân tán, song song
+			. Ngôn ngữ: bậc cao, hướng đối tượng, logic
+		+ 4: 1990-nay: phần mềm lớn, tinh vi, tin cậy, hướng người dùng / CN: vi mạch siêu tích hợp, internet, web, mạng ko dây tốc độ cao, hướng đối tượng
+			. Hệ chuyên gia, trí tuệ nhân tạo, phần mềm nhúng, webservice
+			. Ngôn ngữ: hướng đối tượng, thế hệ thứ 4, visual
+	- Ứng dụng của phần mềm:
+		+ Phần mềm hệ thống:
+		+ Phần mềm thời gian thực:
+		+ Phần mềm nghiệp vụ:
+		+ Phần mềm khoa học và công nghệ:
+		+ Phần mềm nhúng:
+		+ Phần mềm máy tính cá nhân:
+	- Tiến trình phát triển công nghệ phần mềm: có 3 giai đoạn chính:
+		+ Xác định: (cái gì) phân tích hệ thống -> lập kế hoạch dự án PM -> phân tích yêu cầu
+		+ Phát triển: (thế nào) thiết kế PM -> mã hóa -> kiểm thử phần mềm
+		+ Bảo trì: (thay đổi) sửa đổi, thích nghi, nâng cao
