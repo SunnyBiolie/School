@@ -1,0 +1,8 @@
+1. Thiết kế kiến trúc là gì
+Là pha sớm nhất trong quy trình thiết kế hệ thống
+kết quả -> bản đặc tả về kiến trúc phần mềm
+Ưu điểm của thiết kế kiến trúc rõ ràng: giao tiếp giữa các stakeholder, phân tích hệ thống, tái sử dụng quy mô lớn
+Đặc điểm của kiến trúc hệ thống: hiệu năng, bảo mật, an toàn và có khả năng bảo trì
+- Các mô hình kiến trúc cơ bản:
+	+ Mô hình cấu trúc tĩnh
+	+ 
