@@ -1,8 +1,85 @@
 1. Thiết kế kiến trúc là gì
+
 Là pha sớm nhất trong quy trình thiết kế hệ thống
 kết quả -> bản đặc tả về kiến trúc phần mềm
 Ưu điểm của thiết kế kiến trúc rõ ràng: giao tiếp giữa các stakeholder, phân tích hệ thống, tái sử dụng quy mô lớn
 Đặc điểm của kiến trúc hệ thống: hiệu năng, bảo mật, an toàn và có khả năng bảo trì
 - Các mô hình kiến trúc cơ bản:
 	+ Mô hình cấu trúc tĩnh
-	+ 
+	+ Mô hình quy trình động
+	+ Mô hình giao diện
+	+ Mô hình quan hệ
+	+ Mô hình phân tán
+-------------------------------
+2. Tổ chức hệ thống
+
+Xây dựng mô hình tổ chức hệ thống là hoạt động đầu tiên trong thiết kế kiến trúc hệ thống
+- 3 phương pháp tổ chức hệ thống:
+	+ Kho dữ liệu dùng chung
+	+ Server và các dịch vụ dùng chung (client-server)
+	+ Phân rã hệ thống
++ Kho dữ liệu dùng chung:
+	. Đặc điểm: hệ thống con trao đổi dữ liệu và làm việc với nhau hiệu quả, 2 cách trao đổi dữ liệu:
+		DL chia sẻ được lưu ở CSDL trung tâm và đc tất cả hệ thống con truy nhập
+		Hệ thống con bảo trì CSDL chính nó và truyền dữ liệu tường minh cho nhau
+	. Ưu điểm: với số lượng dữ liệu dùng chung rất lớn
+		Hiệu quả để chia sẻ DL số lượng lớn
+		Có bộ quản lý trung tâm thực hiện các hoạt động liên quan đến dữ liệu nến hệ thống con ko cần quan tâm
+	. Nhược điểm:
+		All hệ thống con phải chấp nhận mô hình kho dữ liệu
+		Cải tiến dữ liệu rất phức tạp và tốn kém
+		Khó phân tán hiệu quả
+		Ko có giới hạn cho các chính sách quản lý cụ thể
++ Mô hình client-server: server cung cấp dịch vụ - client truy nhập và sử dụng
+	. Các thành phần chính: tập hợp các server cung cấp DV, tập hợp các client yêu cầu cung cấp DV, hệ thống mạng kết nối 2 phía
+	. Ưu điểm:
+		Phân tán DL rõ ràng, chia sẻ DL và đồng bộ
+		Sử dụng các HT được kết nối mạng hiệu quả, cp phần cứng rẻ hơn
+		Ez bổ sung hoặc nâng cấp server
+	. Nhược điểm:
+		Trao đổi dữ liệu có thể ko hiệu quả
+		Quản lý server ko thống nhất, dư thừa
+		Có thể gây khó khăn trong tìm kiếm DV, server
+	. Phân loại:
+		Thin-Client: Server -> DL + xử lý, Client ->giao diện
+		Fat-Client: Server -> DL, Client -> xủ lý + giao diện
++ Mô hình 3-Tiers: phân làm 3 phân hệ: Data (dịch vụ DL), Business (thư viện xử lý/Application Server), Presentation (giao diện)
+	.Ưu điểm: chia sẻ DL và đồng bộ, dễ bảo trì, nâng cấp
+	. Nhược điểm: tốc độ xử lý, chi phí triển khai
+	. Mô hình đa tầng: mở rông mô hình 3 lớp, chia nhiều tầng xử lý
++ Mô hình Peer-to-Peer: mô hình phân tán, các máy là một nút, đóng vai trò client-server
+	. Ưu điểm: dễ triển khai, ko cần server trung tâm, ko gian lưu trữ và khả năng xử lý dàn trải
+	. Nhược điểm: Khó lập trình và quản lý dữ liệu
+- Thiết kế đối tượng: đối tượng = dữ liệu + xử lý; dữ liệu <-> thuộc tính, xử lý <-> phương thức, đối tượng = instance of class
+	+ Phân loại đối tượng:
+		. Đối tượng nghiệp vụ: DL + xử lý nghiệp vụ
+		. Đối tượng hệ thống: DL + xử lý hỗ trợ
+		. Đối tượng giao diện người dùng: DL + xử lý tương tác người dùng
+	+ Các bước thiết kế đối tượng:
+		. Xây dựng kịch bản tương tác ban đầu
+		. Xác định các đối tượng dựa trên kịch bản đã xây dựng
+		. Chi tiết hóa kịch bản ban đầu với các đối tượng
+			Phân tích các tương tác -> xử lý, đối tượng nhận xử lý sẽ chứa các phương thức tương ứng với xử lý ấy
+- Phân rã hệ thống: sau khi đã chọn cấu trúc hệ thống cần xác định pp phân rã các hệ thống con thành các module
+	+ Hệ thống con vận hành độc lập, sử dụng hoặc cung cấp DV lẫn nhau
+	+ Module là một thành phần hệ thống, cung cấp các DV cho các tp khác, ko đc coi là 1 hệ thống độc lập
+	+ Hai các để phân rã hệ thống con -> module:
+		. Phân rã hướng đối tượng:
+			' Ưu điểm: đối tượng đc gắn kết lỏng lẻo, phản ánh thực thế TG thực, ngôn ngữ OOP sử dụng rộng rãi
+			' Nhược điểm: thay đổi giao diện đối tượng -> vấn đề khó khăn, thực thể phức tạp -> khó biểu diễn
+		. Pipeline hướng chức năng: chuyển đổi thông tin đầu vào -> kq đầu ra, thực hiện tuần tự or song song, xử lý riêng lẻ or theo lô
+			' Ưu điểm: hỗ trợ tái sd quy trình chuyển đổi, cung cấp tài liệu giao tiếp cs StakeHolder, ez bổ sung quy trình chuyển đổi mới, dễ dàng thực hiện
+			' Nhược điểm: yêu cầu phải có định dạng DL chung để truyền qua pipeline, rất khó hỗ trợ tương tác hướng sự kiện
+-------------------------------
+3. Các chiến lược điều khiển: 2 chiến lược: tập trung và hướng sự kiện
+
+- Điều khiển tập trung: hệ thống con chịu trách nhiệm kiểm soát, khởi tạo hoặc dừng hệ thống con khác / 2 loại mô hình
+	+ Gọi trả lời: gồm các thủ tục con được sắp xếp phân cấp, mô hình điều khiển (main) nằm ở đỉnh, hệ thống tuần tự
+	+ Mô hình lan truyền(broadcast): sự kiện lan -> all hệ thống con
+		. Hiệu quả với việc tích hợp các hệ thống con trên nhiều máy tính trong cùng một mạng
+		. Các hệ thống con đăng ký sự kiện có thể bắt, khi sự kiện xảy ra, điều khiển truyền cho các hệ thống có thể bắt sự kiện
+- Điều khiển hướng sự kiện: 2 loại mô hình
+	+ Hướng ngắt (interrupt-driven): sử dụng trong HT real-time, cho phép đáp ứng nhanh, nhưng lập trình phức tạp và khó đánh giá
+	+ Các kiến trúc tham chiếu: các hệ thống cùng một miền ứng dụng có cấu trúc chúng giống nhau -> tái sử dụng, 2 loại mô hình cho 1 miền ứng dụng cụ thể
+		. Mô hình chung: bottom-up
+		. Mô hình tham chiếu: mô hình trừu tượng hóa và lý tưởng, top-down
