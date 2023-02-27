@@ -1,0 +1,47 @@
+1. Mô hình xây dựng phần mềm:
+
+Mô hình phát triển phần mềm là một thể hiện trừu tượng của quy trình phần mềm
+5 mô hình phát triển phần mềm phổ biến: thác nước, xây dựng tiến triển, CNPM dựa thành phần, phát triển lặp lại tăng thêm, xoắn ốc
+- Mô hình thác nước: gồm 5 pha được thực hiện tuần tự, do đó khó trong thay đổi các pha đã thực hiện
+    Phân tích và xác định các yêu cầu -> thiết kế hệ thống và PM -> cài đặt và kiểm thử đơn vị -> tích hợp và kiểm thử hệ thống -> vận hành và bảo trì
+- Mô hình xây dựng tiến triển: xây dựng một mẫu thử ban đầu -> người dùng xem xét -> tinh chỉnh, tối ưu nhiều mẫu thử -> người dùng hài lòng
+    2 phương pháp để thực hiện mô hình:
+    + Phát triển thăm dò:
+        . Để làm việc với khách hàng và đưa ra hệ thống cuối từ những đặc tả sơ bộ ban đầu
+        . Bắt đầu với những yêu cầu đc tìm hiểu rõ ràng, bổ sung những đặc điểm ms đc đề xuất
+    + Loại bỏ mẫu thử:
+        . Để tìm hiểu yêu cầu của hệ thống
+        . Bắt đầu với những yêu cầu không rõ thông tin, phân loại đặc điểm nào thực sự cần, làm sáng tỏ yêu cầu của người sử dụng
+    Nhược điểm: thiếu tầm nhìn cả quy trình, hướng kiến trúc nghèo nàn, yêu cầu kỹ năng đặc biệt
+    Chỉ nên áp dụng ở những HT có tương tác vừa và nhỏ, 1 phần của HT lớn hoặc HT có chu kỳ tồn tại ngắn
+- CNPM dựa thành phần: dựa trên kỹ thuật tái sử dụng, tích hợp từ nhiều tp đang tồn tại hoặc từ các thành phần thương mại COTS
+    + Các trạng thái chính: đặc tả yêu cầu -> phân tích tp -> điều chỉnh yêu cầu -> thiết kế HT vs kỹ thuật tái sử dụng -> xây dựng & tích hợp -> đánh giá
+- Mô hình phát triển lặp lại, tăng thêm: thay vì chuyển giao hệ thống một lần -> chia nhiều vòng, tăng dần, mỗi vòng là 1 phần kq của chức năng
+    Yêu cầu người dùng được đánh thứ tự ưu tiên, nào ưu tiên cao sẽ ở trong vòng phát triển sớm hơn
+    + Ưu điểm: các chức năng của HT sớm được quan sát, các vòng đóng vai trò mẫu thử tìm ra yêu cầu cho vòng tiếp theo, các chức năng ưu tiên cao đc kiểm kỹ
+    + ĐN yêu cầu sơ bộ -> gán yêu cầu từng vòng -> thiết kế kiến trúc HT --> Phát triển 1 vòng -> đánh giá 1 vòng -> tích hợp các vòng -> đánh giá HT --> HT cuối 
+- Mô hình xoắn ốc: thiết lặp mục tiêu -> đánh giá và giảm thiểu rủi ro -> phát triển & đánh giá -> lập kế hoạch
+_________________________________________________________________________________
+2. Các hoạt động trong quy trình PM:
+    4 hoạt động cơ bản: đặc tả, thiết kế & cài đặt, đánh giá, cải tiến / thứ tự các pha tùy mô hình phát triển PM
+
+- Đặc tả PM: xác định yêu cầu của phần mềm, 4 pha chính:
+    + Nghiên cứu khả thi
+    + Phân tích và rút ra các yêu cầu: có thể phải xây dựng mô hình HT & mẫu thử
+    + Đặc tả yêu cầu: tư liệu hóa thông tin thu thập được: yêu cầu của người sử dụng & yêu cầu hệ thống
+    + Đánh giá yêu cầu
+- Thiết kế PM & cài đặt:
+    + TK kiến trúc: mqh giữa các HT con cần được xác định và tự liệu hóa
+    + Đặc tả trừu tượng: mỗi HT con cần 1 bản đặc tả về DV và ràng buộc của nó khi vận hành
+    + TK giao diện
+    + TK thành phần
+    + TK CTDL
+    + TK thuật toán
+    Cài đặt: tài liệu đặc tả -> HT thực. Lập trình: hành động cá nhân, không có quy trình chung
+- Đáng giá PM: kiểm tra -> xem xét lại -> kiểm thử HT
+    + Kiểm thử HT: kiểm thử vs dữ liệu thật được lấy từ tài liệu đặc tả hệ thống
+        . Kiểm thử tp (đơn vị)
+        . Kiểm thử HT
+        . Kiểm thử chấp nhận: kiểm thử trên dữ liệu khách hàng cung cấp
+    Chuyển giao cho khách -> kiểm thử beta
+- Cải tiến PM: chi phí bảo trì & cải tiến > chi phí xây  
