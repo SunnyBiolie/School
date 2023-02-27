@@ -1,0 +1,53 @@
+1. Khái niệm chung:
+
+- Dự án là một công việc có thời hạn -> tạo ra sp, DV hay kq duy nhất
+    + Tính thời hạn:
+    + Tính duy nhất
+    Dự án cần đc quản lý vs giả định sẻ xảy ra thay đổi
+- Dự án phần mềm: ít nhất 2 thành viên; giới hạn về thời gian, ngân sách, nhân lực; sp là PM ms or PM có sẵn đc cải tiến
+- QL dự án: áp dụng kiến thức, kỹ năng, kỹ thuật đáp ứng yêu cầu dự án
+    + Đạt mục tiêu
+    + Đạt hoặc vượt kỳ vọng của stakeholder
+    + Cân bằng các yếu tố: thời gian, chi phí, chất lượng
+- Một số yếu tố: giá thành, thời gian, chất lượng
+    QL dự án để cho ra sp cuối cùng:
+    + trong phạm vi ngân sách cho phép
+    + đúng hạn, phù hợp đặc tả, vs nguồn lực cho phép
+    + chất lượng đủ và đáp ứng tiêu chuẩn
+- Các nhiệm vụ trong QLDA: kiểm soát, lập kế hoạch, tổ chức, tạo động lực, chỉ đạo
+- Các lĩnh vực trong dự án: con người, tiến trình, sản phẩm
+
+    * 4 yếu tố liên quan đến quản lý dự án: con người, sản phẩm, quy trình, dự án
+- Yếu tố con người (quan trọng nhất)
+    + Các tp liên quan (stakeholder): QL cấp cao, QLDA (kỹ thuật), người thực hiện, khách hàng, người dùng cuối
+    + Team leader: mô hình MOI (động viên, tổ chức, ý tưởng & cải tiến
+    + Người QLDA (Project manager): tâm điểm giao tiếp
+        . Liên lạc vs: đội ngũ lãnh đạo, bên ngoài, nội bộ, nhóm dự án
+        . Tăng khả năng: chất lượng sp, đúng lịch trình, thõa mãn yêu cầu KH, khả năng kinh doanh, đạt thành công
+        . Yêu cầu: nắm được chu kỳ sống và tiến trình của DA, vai trò của tiến trình trong công việc ở các pha, nhận biết sự phức tạp và sẵn sàng cho khó khăn
+    + Các mô hình tổ chức giao tiếp: đóng, ngẫu hứng, mở, đồng bộ
+    + Phối hợp và giao tiếp nhóm:
+        . Chính thức, cách tiếp cận cá nhân
+        . Chính thức, thủ tục giao tiếp các nhân
+        . Không chính thức, thủ tục giao tiếp các nhân
+        . Giao tiếp điện tử
+        . Mạng lưới giao tiếp cá nhân
+- Yếu tố sản phẩm:
+    + Phạm vị sp: hoàn cảnh, mục tiêu thông tin, chức năng & hiệu suất
+    + Phân tách vấn đề: sự phân hoạch | giải thích vấn đề -> xác định tất cả chức năng hoặc lớp vấn đề
+________________________________________________________________________________________
+2. Quy trình quản lý dự án
+    
+Khởi động -> hoạch định, tổ chức -> kiểm soát -> kết thúc
+-
+
+- Ước lượng dự án:
+    + ĐN: ước lượng nguồn lực, chi phí, lịch trình
+        . Yêu cầu: kinh nghiệm, tiếp cận tốt các số liệu, đủ can đảm để cam kết vs các dự đoán định lượng
+        . Rủi ro: sự ko chắc chắn
+    + Các nguồn lực: môi trường, con người, phần mềm tái sử dụng
+    + Phạm vi dự án:
+        . Các tính năng chuyển giao cho người dùng, DL input & output, ND như 1 hệ quả của sử dụng PM, hiệu quả hoạt động, ràng buộc, giao diện, độ tin cậy
+        . 1 trong 2 KT: mô tả tường thuật của 1 mô mềm sau khi giao tiếp vs stakeholder, tập hợp các use-case sử dụng đc phát triển bởi người dùng đầu cuối 
+    + Các kỹ thuật ước lượng: kinh nghiệm từ dự án trc, KT thông thường (phân tích & ước tính, mô hình thực nghiệm, đánh giá kích thước), công cụ tự động
+    + Độ chính xác ước lượng: 
