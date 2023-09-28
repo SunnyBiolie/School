@@ -1,0 +1,20 @@
+word_list  = []
+punctionList = [".", "?", "!", "...", ",", ";", ":", "-", "(", ")", "\n"]
+
+for word in words.split():
+  if word not in punctionList and word != "``":
+    word_list.append(word.lower())
+
+vocabulary = []
+result = []
+
+for word in word_list:
+  if word not in vocabulary:
+    vocabulary.append(word)
+
+for word in vocabulary:
+  result.append((word, word_list.count(word)))
+
+
+for r in result:
+  print("\n ", r)
