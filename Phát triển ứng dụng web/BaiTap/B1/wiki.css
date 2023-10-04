@@ -1,0 +1,342 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #202122;
+}
+
+ul {
+  list-style: none;
+}
+
+.header {
+  width: 100vw;
+  padding: 0 44px;
+  height: 66px;
+  background-color: #fe4a49;
+  display: flex;
+  justify-content: center;
+}
+
+.page_container {
+  width: 100vw;
+  padding: 0 44px;
+}
+
+.site_notice {
+  width: 100%;
+  height: 114px;
+  background-color: #2ab7ca;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 960px;
+  padding: 8px 0 24px 0;
+  margin: auto;
+}
+
+.page_toolbar_container {
+  width: 100%;
+  height: 35px;
+  background-color: #fed766;
+}
+
+.content_header {
+  width: 100%;
+  height: 275px;
+  background-color: #ead5dc;
+}
+
+.content_body {
+  width: 976px;
+}
+
+.content_body_left,
+.content_body_right {
+  /* display: inline-block; */
+  margin: 0 8px;
+  width: calc(50% - 16px);
+  font-size: 16px;
+  float: left;
+}
+
+/* .content_body_left {
+  background-color: #6497b1;
+}
+.content_body_right {
+  background-color: #005b96;
+} */
+
+.main_box {
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  box-shadow: 0 2px 3px #eee;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.content_body_bottom {
+  margin: 0 8px;
+}
+
+/* .main_box_container {
+
+} */
+
+.main_box_header {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-weight: bold;
+  margin-bottom: 0.65rem;
+}
+
+.main_box_header .main_box_icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+}
+
+.main_box_header .main_box_title {
+  padding: 0 0.75rem;
+}
+
+.main_box_footer {
+  margin: 1rem 0 -0.175rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.main_box_footer .main_box_dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.main_box_footer .main_box_dropdown_btn {
+  margin: -3px 0;
+  padding: 1em;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/b/b3/OOjs_UI_icon_ellipsis.svg");
+  background-size: 1.25rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.main_box_footer .main_box_dropdown_content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  width: 200px;
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  padding: 6px 0;
+}
+
+.main_box_footer .main_box_dropdown:hover > .main_box_dropdown_content {
+  display: block;
+}
+
+.main_box_footer .main_box_dropdown_content ul {
+  display: flex;
+  flex-flow: wrap column;
+}
+
+.main_box_footer .main_box_dropdown_content ul a {
+  padding: 6px 12px;
+}
+.content_bottom {
+  position: relative;
+  width: 100%;
+  margin-top: calc(1.5rem + 24px);
+  padding-top: 32px;
+  border-top: 2px dotted #e0e0e0;
+}
+
+.content_bottom_icon {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+}
+
+.content_bottom_icon img {
+  width: 76px;
+  height: 48px;
+  padding: 0 14px;
+}
+
+.footer_container {
+  padding: 50px 44px 82px;
+}
+
+.footer {
+  border-top: 1px solid #a2a9b1;
+  padding: 0.75em 0;
+}
+
+.footer li {
+  padding: 6px 0;
+}
+
+/* Content Improvement */
+.content_improvement {
+  display: flex;
+  margin: 0 -8px;
+}
+
+.content_improvement .problems {
+  flex: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  margin: -8px 0;
+}
+
+.content_improvement .problem_item {
+  padding: 8px;
+  width: 40%;
+  flex: 1 2 auto;
+}
+
+.content_improvement .problem_item > a {
+  position: relative;
+  display: block;
+  padding: 8px 16px 16px;
+  color: black;
+  background: #f7f7f7;
+  transition: color 0.1s ease-in-out, background 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out, opacity 0.1s ease-in-out;
+  z-index: 0;
+}
+
+.content_improvement .problem_item > a:hover {
+  color: #fff;
+}
+
+.content_improvement .problem_item > a::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 90%;
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  opacity: 0.02;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.content_improvement .icon_edit_undo > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/c5/OOjs_UI_icon_editUndo-ltr.svg");
+}
+.content_improvement .icon_alert > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/80/OOjs_UI_icon_alert.svg");
+}
+.content_improvement .icon_add > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/0/06/OOjs_UI_icon_add.svg");
+}
+.content_improvement .icon_code > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cd/OOjs_UI_icon_code.svg");
+}
+.content_improvement .icon_eye > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cf/OOjs_UI_icon_eye.svg");
+}
+.content_improvement .icon_history > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/27/OOjs_UI_icon_history.svg");
+}
+.content_improvement .icon_table_merge_cells > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/6/64/OOjs_UI_icon_table-merge-cells.svg");
+}
+.content_improvement .icon_help > a::before {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/b/b2/OOjs_UI_icon_help-ltr.svg");
+}
+
+.content_improvement .problem_item > a:hover::before {
+  opacity: 0.1;
+}
+
+.content_improvement .problem_item a p {
+  font-size: 14px;
+}
+
+.content_improvement .problem_item a p span {
+  font-weight: bold;
+  font-size: 1.8em;
+  padding-right: 0.25em;
+}
+
+.content_improvement .invitation {
+  flex: 3;
+  margin: 0 8px;
+  padding: 16px;
+  background-color: #f7f7f7;
+}
+
+.content_improvement .invitation_title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.content_improvement .invitation_content p {
+  font-size: 14px;
+  margin: 7px auto;
+}
+
+.content_improvement .invitation_button {
+  padding: 12px 0 8px;
+  text-align: center;
+}
+
+.content_improvement .invitation_button a {
+  display: inline-block;
+  background-color: #3366cc;
+  color: #ffffff;
+  border-color: #3366cc;
+  min-height: 32px;
+  min-width: 4em;
+  max-width: 28.75em;
+  padding: 5px 12px;
+  font-weight: bold;
+}
+
+.border_bottom_blue > a {
+  border-bottom: 5px solid #36c;
+}
+.border_bottom_blue > a:hover {
+  background-color: #36c;
+}
+.border_bottom_red > a {
+  border-bottom: 5px solid #dd3333;
+}
+.border_bottom_red > a:hover {
+  background-color: #dd3333;
+}
+.border_bottom_green > a {
+  border-bottom: 5px solid #00af89;
+}
+.border_bottom_green > a:hover {
+  background-color:#00af89;
+}
+.border_bottom_gray > a {
+  border-bottom: 5px solid #a2a9b1;
+}
+.border_bottom_gray > a:hover {
+  background-color:#a2a9b1;
+}
