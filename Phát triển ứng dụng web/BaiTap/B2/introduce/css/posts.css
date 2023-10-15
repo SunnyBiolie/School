@@ -1,0 +1,66 @@
+#post-container {
+  width: 650px;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 576px) {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+.header-container {
+  margin: 3rem 0 2rem;
+}
+
+.content-container {
+  font-size: 1.15rem;
+  font-weight: 500;
+  padding: 1rem 0;
+
+  #tableOfContents {
+    position: sticky;
+    top: 30%;
+
+    & button {
+      position: absolute;
+      left: calc(100% + 2rem);
+
+      @media only screen and (max-width: 576px) {
+        left: 90%;  
+      }
+    }
+  }
+
+  .scrollspy-content {
+    .quote-container {
+      color: #161616;
+      font-style: italic;
+      border-left: 3px solid rgb(42, 163, 225);
+      margin: 0 0 20px -10px;
+      padding: 10px 12px 10px 32px;
+
+      &:hover {
+        background: rgba(109, 203, 252, 0.1);
+      }
+    }
+
+    & img {
+      width: 100%;
+      padding-bottom: 20px;
+      border-radius: 3px;
+    }
+
+    .heading {
+      font-weight: 600;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      text-align: center;
+      font-style: italic;
+      margin-top: -8px;
+    }
+  }
+}
