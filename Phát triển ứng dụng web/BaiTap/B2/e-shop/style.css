@@ -1,0 +1,30 @@
+body {
+  color: #f1f1f1;
+  background: #18191a;
+}
+
+.nav {
+  flex-direction: column;
+
+  @media only screen and (max-width: 576px) {
+    flex-direction: row;
+  }
+}
+
+.nav-tabs {
+  border: transparent;
+  .nav-link {
+    color: inherit;
+    border-radius: 0;
+  }
+}
+
+.tab-content {
+  > .tab-pane {
+    overflow: auto;
+  }
+
+  > .active {
+    display: flex;
+  }
+}
