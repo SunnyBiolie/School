@@ -1,0 +1,15 @@
+.card {
+  /* transform: translateX(-50%); */
+}
+
+.card:not(:first-child) {
+  margin-left: -120px;
+  box-shadow: -3rem 0 3rem -2rem #000;
+}
+
+.card:hover {
+  transform: translateY(-1rem) rotate(3deg);
+}
+.card:hover:not(:last-child) {
+  margin-right: 120px;
+}
